@@ -28,6 +28,7 @@
     "@ngrx/effects": "^4.1.0",
     "@ngrx/store": "^4.1.0",
     "@ngrx/store-devtools": "^4.0.0",
+    "angular2-emoji": "^0.1.6",
     "core-js": "^2.5.1",
     "hammerjs": "^2.0.8",
     "install": "^0.10.1",

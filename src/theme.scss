@@ -20,3 +20,9 @@ $theme: mat-light-theme($primary, $accent, $warn);
 // (optional) Additional themes
 // @include covalent-markdown-theme($theme);
 // @include covalent-highlight-theme();
+
+emoji-input{
+	input {
+		font-size: 11pt !important;
+	}
+}

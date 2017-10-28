@@ -1,15 +1,74 @@
-<mat-card>
-  <mat-card-title>Alerts</mat-card-title>
-  <mat-divider></mat-divider>
-  
-  <mat-card-content>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus reprehenderit repellendus expedita saepe necessitatibus, placeat nostrum pariatur iure, rerum sapiente a nesciunt laborum animi veniam vitae non ullam sed provident.</p>
-  </mat-card-content>
-
-  <mat-divider mat-inset></mat-divider>
-  <mat-card-actions>
-    <div layout="row" layout-align="end center">
-      <button mat-raised-button color="primary">Click</button>
+<td-layout #layout>
+  <td-layout-nav-list #navList [sidenavWidth]="'257px'">
+    <div td-sidenav-toolbar-content layout="row" flex>
+      <h1 class="title-align">UniM</h1>
+      <span flex></span>
+      <div>
+        <button mat-icon-button [matMenuTriggerFor]="notifyMenu"><mat-icon>settings</mat-icon></button>
+        <mat-menu #notifyMenu="matMenu" x-position="before">
+          <button mat-menu-item>Do not disturb ON</button>
+          <button mat-menu-item>Turn OFF</button>
+          <button mat-menu-item>Adjust schedule...</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item>Settings for #channel</button>
+          <button mat-menu-item>Notifications preferences...</button>
+        </mat-menu>
+      </div>
     </div>
-  </mat-card-actions>
-</mat-card>
+    <mat-nav-list td-sidenav-content (click)="!media.query('gt-sm') && navList.close()">
+      <a mat-list-item><mat-icon mat-list-icon>sort</mat-icon> All Unreads</a>
+      <a mat-list-item><mat-icon mat-list-icon>chat</mat-icon> All Threads</a>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>STARRED</h3>
+      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
+        <a mat-list-item><mat-icon mat-list-icon>#</mat-icon> starred-channel-{{i}}</a>
+      </ng-template>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>CHANNELS (5)</h3>
+      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3]">
+        <a mat-list-item><mat-icon mat-list-icon>#</mat-icon> channel-name-{{i}}</a>
+      </ng-template>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>DIRECT MESSAGES</h3>
+      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5]">
+        <a mat-list-item><mat-icon color="accent" mat-list-icon>lens</mat-icon> username{{i}}</a>
+      </ng-template>
+    </mat-nav-list>
+    <a mat-fab td-sidenav-content color="accent" class="mat-fab-position-bottom-right" style="bottom:20px; position: fixed;"> 
+      <mat-icon>add</mat-icon>
+    </a>
+    <div td-toolbar-content layout="row" layout-align="start center" flex>
+        <div class="cursor-hover">Dhruhin Kurli via WhatsApp</div>
+      <span flex></span>
+      <td-search-box placeholder="" [showUnderline]="false"></td-search-box>
+      <button mat-icon-button matTooltip="Show user details" (click)="channelInfo.toggle()"><mat-icon>more_vert</mat-icon></button>
+    </div>
+    <mat-sidenav-container fullscreen>
+      <mat-sidenav #channelInfo mode="side" align="end">
+        <div layout="column" layout-fill>
+          <mat-toolbar>
+            <span>About Dhruhin Kurli</span>
+            <span flex></span>
+            <button mat-icon-button (click)="channelInfo.toggle()"><mat-icon>cancel</mat-icon></button>
+          </mat-toolbar>
+        </div>
+      </mat-sidenav>
+    </mat-sidenav-container>
+    <td-layout-footer-inner class="padding-align">
+      <div layout="row" layout-align="start center">
+        <div>
+          <td-file-input #fileInput [(ngModel)]="files" multiple>
+            <button mat-icon-button matTooltip="Attach File" matTooltipPosition="after"><mat-icon>attach_file</mat-icon></button>
+          </td-file-input>
+        </div>
+        <!-- <mat-input-container class="push-left push-right" flex layout="row" floatPlaceholder="never"> -->
+          <!-- <textarea flex matInput placeholder="Message"></textarea> -->
+          <emoji-input [popupAnchor]="'bottom'" flex></emoji-input>
+        <!-- </mat-input-container> -->
+        <div>
+          <button mat-icon-button matTooltip="Send" matTooltipPosition="before"><mat-icon>send</mat-icon></button>
+        </div>
+      </div>
+    </td-layout-footer-inner>
+  </td-layout-nav-list>
+</td-layout>
