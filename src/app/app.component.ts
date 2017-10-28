@@ -1,8 +1,11 @@
-import { Component, AfterViewInit, ViewContainerRef } from '@angular/core';
+import { Component, AfterViewInit, ViewContainerRef, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { TdMediaService } from '@covalent/core';
 import { TdDialogService } from '@covalent/core';
+import { Store } from '@ngrx/store';
+import { AppState, UserState } from './store/state';
+import { ActionTypes } from './store/actions';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +13,18 @@ import { TdDialogService } from '@covalent/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
 
   files: any;
+
+  loggedIn:boolean = false;
 
   constructor(public media: TdMediaService,
               private _iconRegistry: MatIconRegistry,
               private _domSanitizer: DomSanitizer,
               private _dialogService: TdDialogService,
-              private _viewContainerRef: ViewContainerRef) {
+              private _viewContainerRef: ViewContainerRef,
+              private store: Store<AppState>) {
                 
               this._iconRegistry.addSvgIconInNamespace('assets', 'covalent',
               this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/covalent.svg'));
@@ -27,6 +33,14 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
       this.media.broadcast();
+  }
+
+   ngOnInit() {
+  	this.store.select((state: AppState) => {
+        return state.userState;
+    }).subscribe((userState: UserState) => {
+        this.loggedIn = userState.loggedIn;
+    });
   }
 
   handleNewMessage(): void {
@@ -43,7 +57,7 @@ export class AppComponent implements AfterViewInit {
       acceptButton: 'Logout'
     }).afterClosed().subscribe((accept: boolean) => {
       if (accept) {
-        // DO SOMETHING
+        this.logout();
       } else {
         // DO SOMETHING ELSE
       }
@@ -82,5 +96,13 @@ export class AppComponent implements AfterViewInit {
         // DO SOMETHING ELSE
       }
     });
+  }
+
+  logout(): void {
+  	this.store.dispatch({ type: ActionTypes.LOGOUT, payload: null });
+  }
+
+  login(): void {
+  	this.store.dispatch({ type: ActionTypes.LOGIN, payload: null });
   }
 }

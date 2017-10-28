@@ -8,6 +8,19 @@ import { AppComponent } from './app.component';
 import { CovalentLayoutModule, CovalentStepsModule, CovalentSearchModule, CovalentMenuModule, CovalentMediaModule, CovalentNotificationsModule, CovalentFileModule, CovalentDialogsModule } from '@covalent/core';
 import { EmojiModule } from 'angular2-emoji';
 import 'hammerjs';
+import { StoreModule, combineReducers, ActionReducer } from "@ngrx/store";
+import { AppState, APP_INITIAL_STATE } from './store/state';
+import { UserReducer } from './store/userreducer';
+
+const reducers = {
+  userState: UserReducer
+};
+
+const combinedReducers: ActionReducer<AppState> = combineReducers(reducers);
+
+export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
+  return combinedReducers(state, action);
+}
 
 @NgModule({
   declarations: [
@@ -27,7 +40,8 @@ import 'hammerjs';
     CovalentMediaModule,
     CovalentNotificationsModule,
     CovalentFileModule,
-    EmojiModule
+    EmojiModule,
+    StoreModule.provideStore(appReducers)
   ],
   providers: [],
   bootstrap: [AppComponent]
