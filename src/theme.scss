@@ -24,5 +24,6 @@ $theme: mat-light-theme($primary, $accent, $warn);
 emoji-input{
 	input {
 		font-size: 11pt !important;
+		padding-right: 40px !important;
 	}
 }

@@ -4,44 +4,53 @@
       <h1 class="title-align">UniM</h1>
       <span flex></span>
       <div>
-        <button mat-icon-button [matMenuTriggerFor]="notifyMenu"><mat-icon>settings</mat-icon></button>
-        <mat-menu #notifyMenu="matMenu" x-position="before">
-          <button mat-menu-item>Do not disturb ON</button>
-          <button mat-menu-item>Turn OFF</button>
-          <button mat-menu-item>Adjust schedule...</button>
-          <mat-divider></mat-divider>
-          <button mat-menu-item>Settings for #channel</button>
-          <button mat-menu-item>Notifications preferences...</button>
-        </mat-menu>
+        <button mat-icon-button (click)="openSettings()"><mat-icon>settings</mat-icon></button>
       </div>
     </div>
-    <mat-nav-list td-sidenav-content (click)="!media.query('gt-sm') && navList.close()">
-      <a mat-list-item><mat-icon mat-list-icon>sort</mat-icon> All Unreads</a>
-      <a mat-list-item><mat-icon mat-list-icon>chat</mat-icon> All Threads</a>
+    <mat-nav-list td-sidenav-content>
+      <a mat-list-item (click)="openPriorities()"><mat-icon mat-list-icon>add_circle_outline</mat-icon> Create a New Priority</a>
+      <a mat-list-item><mat-checkbox>Work</mat-checkbox></a>
+      <a mat-list-item><mat-checkbox>Home</mat-checkbox></a>
+      <a mat-list-item><mat-checkbox>Jira</mat-checkbox></a>
+      <a mat-list-item><mat-checkbox>Important</mat-checkbox></a>
       <mat-divider></mat-divider>
-      <h3 mat-subheader>STARRED</h3>
+      <h3 mat-subheader>WORK</h3>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
-        <a mat-list-item><mat-icon mat-list-icon>#</mat-icon> starred-channel-{{i}}</a>
+        <a mat-list-item>
+          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
+          <h3 mat-line> Firstname Lastname</h3>
+          <p mat-line>Message Preview</p>
+          <mat-icon class="tc-amber-800">fiber_new</mat-icon>
+        </a>
       </ng-template>
       <mat-divider></mat-divider>
-      <h3 mat-subheader>CHANNELS (5)</h3>
+      <h3 mat-subheader>HOME</h3>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3]">
-        <a mat-list-item><mat-icon mat-list-icon>#</mat-icon> channel-name-{{i}}</a>
+        <a mat-list-item>
+          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
+          <h3 mat-line> Firstname Lastname </h3>
+          <p mat-line>Message Preview</p>
+        </a>
       </ng-template>
       <mat-divider></mat-divider>
-      <h3 mat-subheader>DIRECT MESSAGES</h3>
-      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5]">
-        <a mat-list-item><mat-icon color="accent" mat-list-icon>lens</mat-icon> username{{i}}</a>
+      <h3 mat-subheader>IMPORTANT</h3>
+      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6]">
+        <a mat-list-item>
+          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
+          <h3 mat-line> Firstname Lastname </h3>
+          <p mat-line>Message Preview</p>
+          <mat-icon class="tc-amber-800">fiber_new</mat-icon>
+        </a>
       </ng-template>
     </mat-nav-list>
-    <a mat-fab td-sidenav-content color="accent" class="mat-fab-position-bottom-right" style="bottom:20px; position: fixed;"> 
+    <a mat-fab td-sidenav-content color="accent" class="mat-fab-position-bottom-right fab-new" (click)="handleNewMessage()"> 
       <mat-icon>add</mat-icon>
     </a>
     <div td-toolbar-content layout="row" layout-align="start center" flex>
         <div class="cursor-hover">Dhruhin Kurli via WhatsApp</div>
       <span flex></span>
       <td-search-box placeholder="" [showUnderline]="false"></td-search-box>
-      <button mat-icon-button matTooltip="Show user details" (click)="channelInfo.toggle()"><mat-icon>more_vert</mat-icon></button>
+      <button mat-icon-button matTooltip="Show User Details" (click)="channelInfo.toggle()"><mat-icon>more_vert</mat-icon></button>
     </div>
     <mat-sidenav-container fullscreen>
       <mat-sidenav #channelInfo mode="side" align="end">
@@ -51,6 +60,7 @@
             <span flex></span>
             <button mat-icon-button (click)="channelInfo.toggle()"><mat-icon>cancel</mat-icon></button>
           </mat-toolbar>
+          <button mat-button (click)="modifyPriorities()"><mat-icon>compare</mat-icon>Modify Priority</button>
         </div>
       </mat-sidenav>
     </mat-sidenav-container>
@@ -61,10 +71,7 @@
             <button mat-icon-button matTooltip="Attach File" matTooltipPosition="after"><mat-icon>attach_file</mat-icon></button>
           </td-file-input>
         </div>
-        <!-- <mat-input-container class="push-left push-right" flex layout="row" floatPlaceholder="never"> -->
-          <!-- <textarea flex matInput placeholder="Message"></textarea> -->
-          <emoji-input [popupAnchor]="'bottom'" flex></emoji-input>
-        <!-- </mat-input-container> -->
+        <emoji-input [popupAnchor]="'bottom'" flex id="messageInput"></emoji-input>
         <div>
           <button mat-icon-button matTooltip="Send" matTooltipPosition="before"><mat-icon>send</mat-icon></button>
         </div>

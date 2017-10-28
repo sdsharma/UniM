@@ -1,7 +1,12 @@
 .padding-align {
-	padding: 0px 16px;
+	padding: 0px 0px;
 }
 
 .title-align {
 	margin-top: 5px;
+}
+
+.fab-new {
+	bottom: 20px;
+	position: fixed;
 }
