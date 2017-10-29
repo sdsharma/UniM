@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatListModule, MatIconModule, MatSidenavModule, MatToolbarModule, MatTooltipModule, MatDialogModule, MatCheckboxModule } from '@angular/material';
+import { MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatListModule, MatIconModule, MatSidenavModule, MatToolbarModule, MatTooltipModule, MatDialogModule, MatCheckboxModule, MatSlideToggleModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { CovalentLayoutModule, CovalentStepsModule, CovalentSearchModule, CovalentMenuModule, CovalentMediaModule, CovalentNotificationsModule, CovalentFileModule, CovalentDialogsModule } from '@covalent/core';
 import { EmojiModule } from 'angular2-emoji';
@@ -28,7 +28,7 @@ export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
   ],
   imports: [
     BrowserModule,
-    MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatListModule, MatIconModule, MatSidenavModule, MatToolbarModule, MatTooltipModule, MatDialogModule, MatCheckboxModule,
+    MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatListModule, MatIconModule, MatSidenavModule, MatToolbarModule, MatTooltipModule, MatDialogModule, MatCheckboxModule, MatSlideToggleModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,

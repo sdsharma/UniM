@@ -98,6 +98,23 @@ export class AppComponent implements AfterViewInit, OnInit {
     });
   }
 
+  registerAccount(): void {
+  	this._dialogService.openConfirm({
+      message: 'Register for an account here',
+      disableClose: false,
+      viewContainerRef: this._viewContainerRef,
+      title: 'Register Account',
+      cancelButton: 'Canel',
+      acceptButton: 'Register'
+    }).afterClosed().subscribe((accept: boolean) => {
+      if (accept) {
+        this.login();
+      } else {
+        // DO SOMETHING ELSE
+      }
+    });
+  }
+
   logout(): void {
   	this.store.dispatch({ type: ActionTypes.LOGOUT, payload: null });
   }

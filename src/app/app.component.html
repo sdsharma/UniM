@@ -1,4 +1,21 @@
-<td-layout #layout>
+<td-layout *ngIf="loggedIn == false">
+  <mat-card class="login-card">
+    <mat-card-content>
+        <h1>Please login to continue</h1>
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="User">
+        </mat-input-container>
+        <br/>
+        <mat-input-container class="full-width-input">
+          <input matInput type="password" placeholder="Password">
+        </mat-input-container>
+        <br/>
+        <button mat-raised-button color="primary" type="submit" (click)="login()">Login</button>
+        <button mat-raised-button color="accent" type="submit" (click)="registerAccount()">Register</button>
+    </mat-card-content>
+  </mat-card>
+</td-layout>
+<td-layout #layout *ngIf="loggedIn == true">
   <td-layout-nav-list #navList [sidenavWidth]="'257px'">
     <div td-sidenav-toolbar-content layout="row" flex>
       <h1 class="title-align">UniM</h1>
