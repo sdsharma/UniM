@@ -21,26 +21,53 @@ export class appEffects {
         .map(toPayload)
         .switchMap(payload => {
             let requestContent = this.prepareRequest(payload);
-            return <Observable<any>>this._http.post(
+            return <Observable<ObseverableAction>>this._http.post(
                 baseUrl + "login",
                 requestContent.content,
                 { headers: requestContent.headers }
             )
-            	.map(this.extractData)
-                .catch(this.handleError)
-                .switchMap(result => {
-                	if(result) {
-	                    return Observable.of(<any>{
-	                        type: ActionTypes.LOGIN,
-	                        payload: null
-	                    });
-                	}
-            		return Observable.of(<any>{
-                        type: ActionTypes.LOGOUT,
+        	.map(this.extractData)
+            .catch(this.handleError)
+            .switchMap(result => {
+            	if(result) {
+                    return Observable.of(<ObseverableAction>{
+                        type: ActionTypes.LOGIN,
                         payload: null
                     });
-                	
+            	}
+        		return Observable.of(<ObseverableAction>{
+                    type: ActionTypes.LOGOUT,
+                    payload: null
                 });
+            	
+            });
+        });
+
+    @Effect() register$ = this.action$
+        .ofType(ActionTypes.REGISTER)
+        .map(toPayload)
+        .switchMap(payload => {
+            let requestContent = this.prepareRequest(payload);
+            return <Observable<ObseverableAction>>this._http.post(
+                baseUrl + "register",
+                requestContent.content,
+                { headers: requestContent.headers }
+            )
+        	.map(this.extractData)
+            .catch(this.handleError)
+            .switchMap(result => {
+            	if(result) {
+                    return Observable.of(<ObseverableAction>{
+                        type: ActionTypes.LOGIN,
+                        payload: null
+                    });
+            	}
+        		return Observable.of(<ObseverableAction>{
+                    type: ActionTypes.LOGOUT,
+                    payload: null
+                });
+            	
+            });
         });
 
 

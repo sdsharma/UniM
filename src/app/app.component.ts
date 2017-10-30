@@ -25,6 +25,12 @@ export class AppComponent implements AfterViewInit, OnInit {
     password: new FormControl('', Validators.required)
   });
 
+  newUserModel: FormGroup = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required)
+  });
+
   constructor(public media: TdMediaService,
               private _iconRegistry: MatIconRegistry,
               private _domSanitizer: DomSanitizer,
@@ -105,6 +111,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   registerAccount(): void {
+    this.model.reset();
   	this._dialogService.openConfirm({
       message: 'Register for an account here',
       disableClose: false,
@@ -128,7 +135,8 @@ export class AppComponent implements AfterViewInit, OnInit {
   login(): void {
     if(this.model.valid){
       this.store.dispatch({ type: ActionTypes.LOGINPOST, payload: {username: <string>this.model.value.username, password: <string>this.model.value.password} });
+    } else if(this.newUserModel.valid){
+
     }
-  	
   }
 }
