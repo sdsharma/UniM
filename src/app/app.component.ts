@@ -6,6 +6,7 @@ import { TdDialogService } from '@covalent/core';
 import { Store } from '@ngrx/store';
 import { AppState, UserState } from './store/state';
 import { ActionTypes } from './store/actions';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,11 @@ export class AppComponent implements AfterViewInit, OnInit {
   files: any;
 
   loggedIn:boolean = false;
+
+  model: FormGroup = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
 
   constructor(public media: TdMediaService,
               private _iconRegistry: MatIconRegistry,
@@ -120,6 +126,9 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   login(): void {
-  	this.store.dispatch({ type: ActionTypes.LOGIN, payload: null });
+    if(this.model.valid){
+      this.store.dispatch({ type: ActionTypes.LOGINPOST, payload: {username: <string>this.model.value.username, password: <string>this.model.value.password} });
+    }
+  	
   }
 }

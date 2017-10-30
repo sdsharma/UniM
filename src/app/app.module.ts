@@ -9,12 +9,19 @@ import { CovalentLayoutModule, CovalentStepsModule, CovalentSearchModule, Covale
 import { EmojiModule } from 'angular2-emoji';
 import 'hammerjs';
 import { StoreModule, combineReducers, ActionReducer } from "@ngrx/store";
+import { EffectsModule } from '@ngrx/effects';
 import { AppState, APP_INITIAL_STATE } from './store/state';
 import { UserReducer } from './store/userreducer';
+import { appEffects } from './store/effects';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const reducers = {
   userState: UserReducer
 };
+
+const effects = [
+  EffectsModule.run(appEffects)
+];
 
 const combinedReducers: ActionReducer<AppState> = combineReducers(reducers);
 
@@ -41,7 +48,9 @@ export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
     CovalentNotificationsModule,
     CovalentFileModule,
     EmojiModule,
-    StoreModule.provideStore(appReducers)
+    StoreModule.provideStore(appReducers),
+    effects,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
