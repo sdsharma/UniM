@@ -20,6 +20,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   loggedIn:boolean = false;
 
+  randusers:string[] =["John Jacobs", "Jasmin Zieman", "Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell", "Gabrielle Newson", "Jenna Mclellan", "Tonya Dominick", "Joselyn Albritton", "Darcie Mayton", "Lilly Beller","Buford Moor", "Michel Lookabaugh", "Mao Ardis", "Senaida Coughlan", "Pat Lowenstein",  "Rima Ackerson","Sally Arnone ", "Elwood Guyer" ];
+  randomwords:string[] = ["Lyricalness", "Supersanguine","Obeyingly","Zygomatic","Nonconfirming","Bombproof","Proinvestment","Grime","Swerve","Quebrada","Botanomancy","Klister","Hackeries","Nondedication","Goriest","Unbreachable","Alternator","Abstemiousness","Incentive","Devouringness"];
+  messages:string[] = ["Hey there", "Whats up", "You know", "Gains?", "Those a fantastic", "Yes they are", "I like to workout 10x a week", "That's probably not good for you", "Oh its ok steroids help a lot", "That's not a good idea", "Yeah probably not"];
   model: FormGroup = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -53,6 +56,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     }).subscribe((userState: UserState) => {
         this.loggedIn = userState.loggedIn;
     });
+
   }
 
   handleNewMessage(): void {
@@ -82,7 +86,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       disableClose: false,
       viewContainerRef: this._viewContainerRef,
       title: 'Add Priority',
-      cancelButton: 'Canel',
+      cancelButton: 'Cancel',
       acceptButton: 'Save'
     }).afterClosed().subscribe((accept: boolean) => {
       if (accept) {
@@ -99,7 +103,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       disableClose: false,
       viewContainerRef: this._viewContainerRef,
       title: 'Modify Priority',
-      cancelButton: 'Canel',
+      cancelButton: 'Cancel',
       acceptButton: 'Save'
     }).afterClosed().subscribe((accept: boolean) => {
       if (accept) {
@@ -117,7 +121,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       disableClose: false,
       viewContainerRef: this._viewContainerRef,
       title: 'Register Account',
-      cancelButton: 'Canel',
+      cancelButton: 'Cancel',
       acceptButton: 'Register'
     }).afterClosed().subscribe((accept: boolean) => {
       if (accept) {
@@ -137,6 +141,21 @@ export class AppComponent implements AfterViewInit, OnInit {
       this.store.dispatch({ type: ActionTypes.LOGINPOST, payload: {username: <string>this.model.value.username, password: <string>this.model.value.password} });
     } else if(this.newUserModel.valid){
 
+    }
+  }
+
+  sendMessage(evt): void {
+    let msg = document.getElementById('messageInput').getElementsByTagName('input')[0].value;
+    if(msg != ""){
+      this.messages.push(msg);
+      document.getElementById('messageInput').getElementsByTagName('input')[0].value = "";
+    }
+  }
+
+  shuffleMessages():void {
+    for (let i = this.messages.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
     }
   }
 }

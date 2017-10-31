@@ -35,29 +35,29 @@
       <mat-divider></mat-divider>
       <h3 mat-subheader>WORK</h3>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
-        <a mat-list-item>
+        <a mat-list-item (click)="shuffleMessages()">
           <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
-          <h3 mat-line> Firstname Lastname</h3>
-          <p mat-line>Message Preview</p>
+          <h3 mat-line>{{randusers[i]}}</h3>
+          <p mat-line>{{randomwords[i]}}</p>
           <mat-icon class="tc-amber-800">fiber_new</mat-icon>
         </a>
       </ng-template>
       <mat-divider></mat-divider>
       <h3 mat-subheader>HOME</h3>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3]">
-        <a mat-list-item>
-          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
-          <h3 mat-line> Firstname Lastname </h3>
-          <p mat-line>Message Preview</p>
+        <a mat-list-item (click)="shuffleMessages()">
+          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i + 2}}" />
+          <h3 mat-line>{{randusers[i + 2]}}</h3>
+          <p mat-line>{{randomwords[i + 2]}}</p>
         </a>
       </ng-template>
       <mat-divider></mat-divider>
       <h3 mat-subheader>IMPORTANT</h3>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6]">
-        <a mat-list-item>
+        <a mat-list-item (click)="shuffleMessages()">
           <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
-          <h3 mat-line> Firstname Lastname </h3>
-          <p mat-line>Message Preview</p>
+          <h3 mat-line>{{randusers[i + 6]}}</h3>
+          <p mat-line>{{randomwords[i + 6]}}</p>
           <mat-icon class="tc-amber-800">fiber_new</mat-icon>
         </a>
       </ng-template>
@@ -72,7 +72,7 @@
       <button mat-icon-button matTooltip="Show User Details" (click)="channelInfo.toggle()"><mat-icon>more_vert</mat-icon></button>
     </div>
     <mat-sidenav-container fullscreen>
-      <mat-sidenav #channelInfo mode="side" align="end">
+     <mat-sidenav #channelInfo mode="side" align="end">
         <div layout="column" layout-fill>
           <mat-toolbar>
             <span>About Dhruhin Kurli</span>
@@ -82,6 +82,16 @@
           <button mat-button (click)="modifyPriorities()"><mat-icon>compare</mat-icon>Modify Priority</button>
         </div>
       </mat-sidenav>
+     <mat-list>
+        <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="messages">
+            <mat-list-item>
+              <mat-chip-list>
+                <mat-chip color="primary" selected="true" *ngIf="i % 2 == 0">{{messages[i]}}</mat-chip>
+                <mat-chip color="accent" selected="true" *ngIf="i % 2 == 1">{{messages[i]}}</mat-chip>
+              </mat-chip-list>
+            </mat-list-item>
+        </ng-template>
+      </mat-list>
     </mat-sidenav-container>
     <td-layout-footer-inner class="padding-align">
       <div layout="row" layout-align="start center">
@@ -90,9 +100,9 @@
             <button mat-icon-button matTooltip="Attach File" matTooltipPosition="after"><mat-icon>attach_file</mat-icon></button>
           </td-file-input>
         </div>
-        <emoji-input [popupAnchor]="'bottom'" flex id="messageInput"></emoji-input>
+          <emoji-input [popupAnchor]="'bottom'" flex id="messageInput"></emoji-input>
         <div>
-          <button mat-icon-button matTooltip="Send" matTooltipPosition="before"><mat-icon>send</mat-icon></button>
+          <button mat-icon-button matTooltip="Send" matTooltipPosition="before" (click)="sendMessage($event)"><mat-icon>send</mat-icon></button>
         </div>
       </div>
     </td-layout-footer-inner>
