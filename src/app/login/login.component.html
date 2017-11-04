@@ -1,4 +1,4 @@
-<form [formGroup]="model" class="bg">
+<form [formGroup]="model" class="bg" *ngIf="register == false">
   <mat-card class="login-card">
     <mat-card-content>
         <h1 class="title">UniM</h1>
@@ -12,6 +12,36 @@
         <br/>
         <button mat-raised-button color="primary" type="submit" (click)="login()">Login</button>
         <button mat-raised-button color="accent" type="submit" (click)="registerAccount()">Register</button>
+    </mat-card-content>
+  </mat-card>
+</form>
+
+<form [formGroup]="newUserModel" class="bg" *ngIf="register == true">
+  <mat-card class="login-card">
+    <mat-card-content>
+        <h1 class="title">UniM</h1>
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="First Name" formControlName="firstname">
+        </mat-input-container>
+        <br/>
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="Last Name" formControlName="lastname">
+        </mat-input-container>
+        <br/>
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-input-container>
+        <br/>
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="User" formControlName="username">
+        </mat-input-container>
+        <br/>
+        <mat-input-container class="full-width-input">
+          <input matInput type="password" placeholder="Password" formControlName="password">
+        </mat-input-container>
+        <br/>
+        <button mat-raised-button color="accent" type="submit" (click)="registerAccount()">Register</button>
+        <button mat-raised-button color="primary" type="submit" (click)="cancelRegister()">Cancel</button>
     </mat-card-content>
   </mat-card>
 </form>

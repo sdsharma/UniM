@@ -32,7 +32,7 @@ export class appEffects {
             	if(result) {
                     return Observable.of(<ObseverableAction>{
                         type: ActionTypes.LOGIN,
-                        payload: null
+                        payload: result
                     });
             	}
         		return Observable.of(<ObseverableAction>{
@@ -59,7 +59,7 @@ export class appEffects {
             	if(result) {
                     return Observable.of(<ObseverableAction>{
                         type: ActionTypes.LOGIN,
-                        payload: null
+                        payload: result
                     });
             	}
         		return Observable.of(<ObseverableAction>{

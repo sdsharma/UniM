@@ -1,9 +1,11 @@
 export interface UserState {
 	loggedIn: boolean;
+	userData: any;
 }
 
 export const USER_INITIAL_STATE: UserState = {
-	loggedIn: false
+	loggedIn: false,
+	userData: null
 }
 
 export interface AppState {

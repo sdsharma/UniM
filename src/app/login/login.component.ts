@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loggedIn:boolean = false;
+  register: boolean = false;
 
   constructor(private store: Store<AppState>, private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef, private router: Router) { }
@@ -27,7 +28,9 @@ export class LoginComponent implements OnInit {
   newUserModel: FormGroup = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required)
+    email: new FormControl('', Validators.required),
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required)
   });
 
   ngOnInit() {
@@ -44,27 +47,23 @@ export class LoginComponent implements OnInit {
   
   login(): void {
     if(this.model.valid){
-      this.store.dispatch({ type: ActionTypes.LOGINPOST, payload: {username: <string>this.model.value.username, password: <string>this.model.value.password} });
-    } else if(this.newUserModel.valid){
+      this.store.dispatch({ type: ActionTypes.LOGINPOST, payload: this.model.value });
+    }
+  }
 
+  registerComplete(): void {
+    if(this.newUserModel.valid){
+      this.store.dispatch({type: ActionTypes.REGISTER, payload: this.newUserModel.value });
     }
   }
 
   registerAccount(): void {
     this.model.reset();
-    this._dialogService.openConfirm({
-      message: 'Register for an account here',
-      disableClose: false,
-      viewContainerRef: this._viewContainerRef,
-      title: 'Register Account',
-      cancelButton: 'Cancel',
-      acceptButton: 'Register'
-    }).afterClosed().subscribe((accept: boolean) => {
-      if (accept) {
-        this.login();
-      } else {
-        // DO SOMETHING ELSE
-      }
-    });
+    this.register = true;
+  }
+
+  cancelRegister(): void {
+    this.newUserModel.reset();
+    this.register = false;
   }
 }

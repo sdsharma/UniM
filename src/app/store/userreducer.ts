@@ -7,9 +7,11 @@ export function UserReducer(state: UserState = USER_INITIAL_STATE, action: Actio
     const newState: UserState = Object.assign({}, state);
     switch (action.type) {
        	case ActionTypes.LOGIN:
+          newState.userData = action.payload;
        		newState.loggedIn = true;
        		return newState;
        	case ActionTypes.LOGOUT:
+          newState.userData = null;
        		newState.loggedIn = false;
        		return newState;
         default:
