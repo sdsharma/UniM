@@ -1,0 +1,17 @@
+<form [formGroup]="model">
+  <mat-card class="login-card">
+    <mat-card-content>
+        <h1>Please login to continue</h1>
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="User" formControlName="username">
+        </mat-input-container>
+        <br/>
+        <mat-input-container class="full-width-input">
+          <input matInput type="password" placeholder="Password" formControlName="password">
+        </mat-input-container>
+        <br/>
+        <button mat-raised-button color="primary" type="submit" (click)="login()">Login</button>
+        <button mat-raised-button color="accent" type="submit" (click)="registerAccount()">Register</button>
+    </mat-card-content>
+  </mat-card>
+</form>

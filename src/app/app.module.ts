@@ -14,6 +14,10 @@ import { AppState, APP_INITIAL_STATE } from './store/state';
 import { UserReducer } from './store/userreducer';
 import { appEffects } from './store/effects';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MessagesComponent } from "./messages/messages.component";
+import { LoginComponent } from "./login/login.component";
+import { ROUTING } from "./app.routing";
+import { AccessControlGuard } from './shared/guards/accesscontrol.service';
 
 const reducers = {
   userState: UserReducer
@@ -31,7 +35,9 @@ export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MessagesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +56,10 @@ export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
     EmojiModule,
     StoreModule.provideStore(appReducers),
     effects,
+    ROUTING,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AccessControlGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,99 @@
+<td-layout #layout>
+ <td-navigation-drawer flex sidenavTitle="UniM" name="Firstname Lastname" email="firstname.lastname@company.com">
+    <mat-nav-list>
+      <a mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Sign Out</a>
+    </mat-nav-list>
+  </td-navigation-drawer>
+  <td-layout-nav-list #navList
+    toolbarTitle="UniM"
+    [opened]="media.registerQuery('gt-xs') | async"
+    [mode]="(media.registerQuery('gt-xs') | async) ? 'side' : 'push'"
+    [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '350px' : '100%'">
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div td-toolbar-content layout="row" layout-align="start center" flex>
+    <button mat-icon-button tdLayoutNavListOpen [hideWhenOpened]="true">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    <span flex *ngIf="!searchBox.searchVisible">Dhruhin Kurli via WhatsApp</span>
+    <td-search-box #searchBox class="pull-top-sm pull-bottom-sm" placeholder="" flex>
+    </td-search-box>
+    <button mat-icon-button matTooltip="Show User Details" (click)="channelInfo.toggle()"><mat-icon>more_vert</mat-icon></button>
+  </div>
+  <mat-nav-list td-sidenav-content>
+      <a mat-list-item (click)="openPriorities()"><mat-icon mat-list-icon>add_circle_outline</mat-icon> Create a New Priority</a>
+      <a mat-list-item><mat-checkbox>Work</mat-checkbox></a>
+      <a mat-list-item><mat-checkbox>Home</mat-checkbox></a>
+      <a mat-list-item><mat-checkbox>Jira</mat-checkbox></a>
+      <a mat-list-item><mat-checkbox>Important</mat-checkbox></a>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>WORK</h3>
+      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
+        <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
+          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
+          <h3 mat-line>{{randusers[i]}}</h3>
+          <p mat-line>{{randomwords[i]}}</p>
+          <mat-icon class="tc-amber-800">fiber_new</mat-icon>
+        </a>
+      </ng-template>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>HOME</h3>
+      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3]">
+        <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
+          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i + 2}}" />
+          <h3 mat-line>{{randusers[i + 2]}}</h3>
+          <p mat-line>{{randomwords[i + 2]}}</p>
+        </a>
+      </ng-template>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>IMPORTANT</h3>
+      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6]">
+        <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
+          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
+          <h3 mat-line>{{randusers[i + 6]}}</h3>
+          <p mat-line>{{randomwords[i + 6]}}</p>
+          <mat-icon class="tc-amber-800">fiber_new</mat-icon>
+        </a>
+      </ng-template>
+    </mat-nav-list>
+  <a mat-fab td-sidenav-content color="accent" class="mat-fab-position-bottom-right fab-new" (click)="!media.query('gt-sm') && navList.close(); handleNewMessage()"> 
+    <mat-icon>add</mat-icon>
+  </a>
+  <mat-sidenav-container fullscreen>
+     <mat-sidenav #channelInfo mode="side" align="end">
+        <div layout="column" layout-fill>
+          <mat-toolbar>
+            <span>About Dhruhin Kurli</span>
+            <span flex></span>
+            <button mat-icon-button (click)="channelInfo.toggle()"><mat-icon>cancel</mat-icon></button>
+          </mat-toolbar>
+          <button mat-button (click)="modifyPriorities()"><mat-icon>compare</mat-icon>Modify Priority</button>
+        </div>
+      </mat-sidenav>
+     <mat-list>
+        <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="messages">
+            <mat-list-item>
+              <mat-chip-list>
+                <mat-chip color="primary" selected="true" *ngIf="i % 2 == 0">{{messages[i]}}</mat-chip>
+                <mat-chip color="accent" selected="true" *ngIf="i % 2 == 1">{{messages[i]}}</mat-chip>
+              </mat-chip-list>
+            </mat-list-item>
+        </ng-template>
+      </mat-list>
+    </mat-sidenav-container>
+    <td-layout-footer-inner class="padding-align">
+      <div layout="row" layout-align="start center">
+        <div>
+          <td-file-input #fileInput [(ngModel)]="files" multiple>
+            <button mat-icon-button matTooltip="Attach File" matTooltipPosition="after"><mat-icon>attach_file</mat-icon></button>
+          </td-file-input>
+        </div>
+          <emoji-input [popupAnchor]="'bottom'" flex id="messageInput"></emoji-input>
+        <div>
+          <button mat-icon-button matTooltip="Send" matTooltipPosition="before" (click)="sendMessage($event)"><mat-icon>send</mat-icon></button>
+        </div>
+      </div>
+    </td-layout-footer-inner>
+</td-layout-nav-list>
+</td-layout>
