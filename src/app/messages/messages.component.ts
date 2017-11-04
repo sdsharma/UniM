@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState, UserState } from '../store/state';
 import { ActionTypes } from '../store/actions';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-messages',
@@ -26,7 +27,8 @@ export class MessagesComponent implements AfterViewInit, OnInit {
               private _domSanitizer: DomSanitizer,
               private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef,
-              private store: Store<AppState>) {
+              private store: Store<AppState>,
+              private router: Router) {
                 
               this._iconRegistry.addSvgIconInNamespace('assets', 'covalent',
               this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/covalent.svg'));
@@ -81,6 +83,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
 
   logout(): void {
   	this.store.dispatch({ type: ActionTypes.LOGOUT, payload: null });
+    this.router.navigate(['login']);
   }
 
   sendMessage(evt): void {

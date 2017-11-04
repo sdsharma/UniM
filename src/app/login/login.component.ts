@@ -6,7 +6,6 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from 'rxjs';
 import { TdDialogService } from '@covalent/core';
 import { Router } from '@angular/router';
-import { AccessControlGuard } from '../shared/guards/accesscontrol.service';
 
 @Component({
   selector: 'app-login',
