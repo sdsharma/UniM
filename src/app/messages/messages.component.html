@@ -75,9 +75,11 @@
      <mat-list>
         <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="messages">
             <mat-list-item>
-              <mat-chip-list>
-                <mat-chip color="primary" selected="true" *ngIf="i % 2 == 0">{{messages[i]}}</mat-chip>
-                <mat-chip color="accent" selected="true" *ngIf="i % 2 == 1">{{messages[i]}}</mat-chip>
+              <mat-chip-list *ngIf="i % 2 == 0" class="user-message">
+                <mat-chip color="accent" selected="true">{{messages[i]}}</mat-chip>
+              </mat-chip-list>
+              <mat-chip-list *ngIf="i % 2 == 1">
+                <mat-chip color="primary" selected="true">{{messages[i]}}</mat-chip>
               </mat-chip-list>
             </mat-list-item>
         </ng-template>
