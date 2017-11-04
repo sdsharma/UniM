@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewContainerRef, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewContainerRef, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { TdMediaService } from '@covalent/core';
@@ -22,25 +22,24 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   randusers:string[] =["John Jacobs", "Jasmin Zieman", "Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell", "Gabrielle Newson", "Jenna Mclellan", "Tonya Dominick", "Joselyn Albritton", "Darcie Mayton", "Lilly Beller","Buford Moor", "Michel Lookabaugh", "Mao Ardis", "Senaida Coughlan", "Pat Lowenstein",  "Rima Ackerson","Sally Arnone ", "Elwood Guyer" ];
   randomwords:string[] = ["Lyricalness", "Supersanguine","Obeyingly","Zygomatic","Nonconfirming","Bombproof","Proinvestment","Grime","Swerve","Quebrada","Botanomancy","Klister","Hackeries","Nondedication","Goriest","Unbreachable","Alternator","Abstemiousness","Incentive","Devouringness"];
   messages:string[] = ["Hey there", "Whats up", "You know", "Gains?", "Those a fantastic", "Yes they are", "I like to workout 10x a week", "That's probably not good for you", "Oh its ok steroids help a lot", "That's not a good idea", "Yeah probably not"];
-  constructor(public media: TdMediaService,
+  constructor(private _changeDetectorRef: ChangeDetectorRef,
+              public media: TdMediaService,
               private _iconRegistry: MatIconRegistry,
               private _domSanitizer: DomSanitizer,
               private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef,
               private store: Store<AppState>,
-              private router: Router) {
-                
-              this._iconRegistry.addSvgIconInNamespace('assets', 'covalent',
-              this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/covalent.svg'));
-
-  }
+              private router: Router) {}
 
   ngAfterViewInit(): void {
+    setTimeout(() => {
       this.media.broadcast();
+      this._changeDetectorRef.detectChanges();
+    });
   }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
+    
   }
 
   handleNewMessage(): void {
