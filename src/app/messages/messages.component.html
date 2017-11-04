@@ -1,5 +1,5 @@
 <td-layout #layout>
- <td-navigation-drawer flex sidenavTitle="Settings" name="Firstname Lastname" email="firstname.lastname@company.com">
+ <td-navigation-drawer flex sidenavTitle="Settings" [name]="userData.firstname + ' ' + userData.lastname" [email]="userData.email">
     <mat-nav-list>
       <a mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Sign Out</a>
     </mat-nav-list>
