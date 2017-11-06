@@ -39,7 +39,8 @@
       <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Jira</mat-checkbox></a>
       <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Important</mat-checkbox></a>
       <mat-divider *ngIf="!smartMode"></mat-divider>
-      <h3 mat-subheader>WORK</h3>
+      <h3 mat-subheader *ngIf="!smartMode">WORK</h3>
+      <h3 mat-subheader *ngIf="smartMode">HIGH PRIORITY</h3>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
         <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
           <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
@@ -49,7 +50,8 @@
         </a>
       </ng-template>
       <mat-divider></mat-divider>
-      <h3 mat-subheader>HOME</h3>
+      <h3 mat-subheader *ngIf="!smartMode">HOME</h3>
+      <h3 mat-subheader *ngIf="smartMode">MEDIUM PRIORITY</h3>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3]">
         <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
           <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i + 2}}" />
@@ -58,7 +60,8 @@
         </a>
       </ng-template>
       <mat-divider></mat-divider>
-      <h3 mat-subheader>IMPORTANT</h3>
+      <h3 mat-subheader *ngIf="!smartMode">IMPORTANT</h3>
+      <h3 mat-subheader *ngIf="smartMode">LOW PRIORITY</h3>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6]">
         <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
           <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
