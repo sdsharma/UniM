@@ -2,7 +2,7 @@
  <td-navigation-drawer flex sidenavTitle="Settings" [name]="userData.firstname + ' ' + userData.lastname" [email]="userData.email">
     <mat-nav-list>
       <p class="accounts-head inline"><strong>Smart Priority</strong><mat-icon matTooltip="Enable this if you want the app to autonomously determine the priority of your conversations" matTooltipPosition="after" class="info">info</mat-icon></p>
-      <mat-slide-toggle class="inline smart-toggle"></mat-slide-toggle>
+      <mat-slide-toggle class="inline smart-toggle" [(ngModel)]="smartMode"></mat-slide-toggle>
       <mat-divider></mat-divider>
       <p class="accounts-head"><strong>Connected Accounts</strong></p>
       <mat-divider></mat-divider>
@@ -33,12 +33,12 @@
     <button mat-icon-button matTooltip="Show User Details" (click)="channelInfo.toggle()"><mat-icon>more_vert</mat-icon></button>
   </div>
   <mat-nav-list td-sidenav-content>
-      <a mat-list-item (click)="openPriorities()"><mat-icon mat-list-icon>add_circle_outline</mat-icon> Create a New Label</a>
-      <a mat-list-item><mat-checkbox>Work</mat-checkbox></a>
-      <a mat-list-item><mat-checkbox>Home</mat-checkbox></a>
-      <a mat-list-item><mat-checkbox>Jira</mat-checkbox></a>
-      <a mat-list-item><mat-checkbox>Important</mat-checkbox></a>
-      <mat-divider></mat-divider>
+      <a mat-list-item (click)="openPriorities()" *ngIf="!smartMode"><mat-icon mat-list-icon>add_circle_outline</mat-icon> Create a New Label</a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Work</mat-checkbox></a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Home</mat-checkbox></a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Jira</mat-checkbox></a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Important</mat-checkbox></a>
+      <mat-divider *ngIf="!smartMode"></mat-divider>
       <h3 mat-subheader>WORK</h3>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
         <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
