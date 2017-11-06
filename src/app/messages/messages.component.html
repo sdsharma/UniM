@@ -34,42 +34,47 @@
   </div>
   <mat-nav-list td-sidenav-content>
       <a mat-list-item (click)="openPriorities()" *ngIf="!smartMode"><mat-icon mat-list-icon>add_circle_outline</mat-icon> Create a New Label</a>
-      <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Work</mat-checkbox></a>
-      <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Home</mat-checkbox></a>
-      <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Jira</mat-checkbox></a>
-      <a mat-list-item *ngIf="!smartMode"><mat-checkbox>Important</mat-checkbox></a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="workFilter">Work</mat-checkbox></a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="homeFilter">Home</mat-checkbox></a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="importantFilter">Important</mat-checkbox></a>
       <mat-divider *ngIf="!smartMode"></mat-divider>
-      <h3 mat-subheader *ngIf="!smartMode">WORK</h3>
-      <h3 mat-subheader *ngIf="smartMode">HIGH PRIORITY</h3>
-      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
-        <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
-          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
-          <h3 mat-line>{{randusers[i]}}</h3>
-          <p mat-line>{{randomwords[i]}}</p>
-          <mat-icon class="tc-amber-800">fiber_new</mat-icon>
-        </a>
-      </ng-template>
-      <mat-divider></mat-divider>
-      <h3 mat-subheader *ngIf="!smartMode">HOME</h3>
-      <h3 mat-subheader *ngIf="smartMode">MEDIUM PRIORITY</h3>
-      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3]">
-        <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
-          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i + 2}}" />
-          <h3 mat-line>{{randusers[i + 2]}}</h3>
-          <p mat-line>{{randomwords[i + 2]}}</p>
-        </a>
-      </ng-template>
-      <mat-divider></mat-divider>
-      <h3 mat-subheader *ngIf="!smartMode">IMPORTANT</h3>
-      <h3 mat-subheader *ngIf="smartMode">LOW PRIORITY</h3>
-      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6]">
-        <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
-          <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
-          <h3 mat-line>{{randusers[i + 6]}}</h3>
-          <p mat-line>{{randomwords[i + 6]}}</p>
-          <mat-icon class="tc-amber-800">fiber_new</mat-icon>
-        </a>
-      </ng-template>
+      <span *ngIf="smartMode || workFilter || (!workFilter && !homeFilter && !importantFilter)">
+        <h3 mat-subheader *ngIf="!smartMode">WORK</h3>
+        <h3 mat-subheader *ngIf="smartMode">HIGH PRIORITY</h3>
+        <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
+          <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
+            <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
+            <h3 mat-line>{{randusers[i]}}</h3>
+            <p mat-line>{{randomwords[i]}}</p>
+            <mat-icon class="tc-amber-800">fiber_new</mat-icon>
+          </a>
+        </ng-template>
+        <mat-divider></mat-divider>
+      </span>
+      <span *ngIf="smartMode || homeFilter || (!workFilter && !homeFilter && !importantFilter)">
+        <h3 mat-subheader *ngIf="!smartMode">HOME</h3>
+        <h3 mat-subheader *ngIf="smartMode">MEDIUM PRIORITY</h3>
+        <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3]">
+          <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
+            <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i + 2}}" />
+            <h3 mat-line>{{randusers[i + 2]}}</h3>
+            <p mat-line>{{randomwords[i + 2]}}</p>
+          </a>
+        </ng-template>
+        <mat-divider></mat-divider>
+      </span>
+      <span *ngIf="smartMode || importantFilter || (!workFilter && !homeFilter && !importantFilter)">
+        <h3 mat-subheader *ngIf="!smartMode">IMPORTANT</h3>
+        <h3 mat-subheader *ngIf="smartMode">LOW PRIORITY</h3>
+        <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6]">
+          <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
+            <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
+            <h3 mat-line>{{randusers[i + 6]}}</h3>
+            <p mat-line>{{randomwords[i + 6]}}</p>
+            <mat-icon class="tc-amber-800">fiber_new</mat-icon>
+          </a>
+        </ng-template>
+      </span>
     </mat-nav-list>
   <a mat-fab td-sidenav-content color="accent" class="mat-fab-position-bottom-right fab-new" (click)="!media.query('gt-sm') && navList.close(); handleNewMessage()"> 
     <mat-icon>add</mat-icon>
