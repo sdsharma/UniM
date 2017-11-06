@@ -1,6 +1,16 @@
 <td-layout #layout>
  <td-navigation-drawer flex sidenavTitle="Settings" [name]="userData.firstname + ' ' + userData.lastname" [email]="userData.email">
     <mat-nav-list>
+      <p class="accounts-head inline"><strong>Smart Priority</strong><mat-icon matTooltip="Enable this if you want the app to autonomously determine the priority of your conversations" matTooltipPosition="after" class="info">info</mat-icon></p>
+      <mat-slide-toggle class="inline smart-toggle"></mat-slide-toggle>
+      <mat-divider></mat-divider>
+      <p class="accounts-head"><strong>Connected Accounts</strong></p>
+      <mat-divider></mat-divider>
+      <a mat-list-item href="https://slack.com/" target="_blank"><mat-icon>message</mat-icon>Slack</a>
+      <a mat-list-item href="https://messenger.com" target="_blank"><mat-icon>question_answer</mat-icon>FB Messenger</a>
+      <a mat-list-item href="https://www.whatsapp.com" target="_blank"><mat-icon>speaker_notes</mat-icon>WhatsApp</a>
+      <a mat-list-item href="https://mail.google.com" target="_blank"><mat-icon>email</mat-icon>Gmail</a>
+      <mat-divider></mat-divider>
       <a mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Sign Out</a>
     </mat-nav-list>
   </td-navigation-drawer>
@@ -23,7 +33,7 @@
     <button mat-icon-button matTooltip="Show User Details" (click)="channelInfo.toggle()"><mat-icon>more_vert</mat-icon></button>
   </div>
   <mat-nav-list td-sidenav-content>
-      <a mat-list-item (click)="openPriorities()"><mat-icon mat-list-icon>add_circle_outline</mat-icon> Create a New Priority</a>
+      <a mat-list-item (click)="openPriorities()"><mat-icon mat-list-icon>add_circle_outline</mat-icon> Create a New Label</a>
       <a mat-list-item><mat-checkbox>Work</mat-checkbox></a>
       <a mat-list-item><mat-checkbox>Home</mat-checkbox></a>
       <a mat-list-item><mat-checkbox>Jira</mat-checkbox></a>

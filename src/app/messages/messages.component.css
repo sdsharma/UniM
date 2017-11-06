@@ -23,3 +23,23 @@
 	margin-left:auto;
 	margin-right:0;
 }
+
+.accounts-head {
+	margin-left: 8px;
+}
+
+.info {
+	font-size: 20px;
+    margin-left: 8px;
+    vertical-align: top;
+}
+
+.smart-toggle {
+    float: right;
+    margin-top: 17px;
+    margin-right: 16px;
+}
+
+.inline {
+	display: inline-block;
+}
