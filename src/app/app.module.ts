@@ -18,6 +18,7 @@ import { MessagesComponent } from "./messages/messages.component";
 import { LoginComponent } from "./login/login.component";
 import { ROUTING } from "./app.routing";
 import { AccessControlGuard } from './shared/guards/accesscontrol.service';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 const reducers = {
   userState: UserReducer
@@ -57,7 +58,8 @@ export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
     StoreModule.provideStore(appReducers),
     effects,
     ROUTING,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FilterPipeModule
   ],
   providers: [AccessControlGuard],
   bootstrap: [AppComponent]
