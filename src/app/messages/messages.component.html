@@ -79,7 +79,7 @@
   <a mat-fab td-sidenav-content color="accent" class="mat-fab-position-bottom-right fab-new" (click)="!media.query('gt-sm') && navList.close(); handleNewMessage()"> 
     <mat-icon>add</mat-icon>
   </a>
-  <mat-sidenav-container tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+  <mat-sidenav-container tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']" fullscreen>
      <mat-sidenav #channelInfo mode="side" align="end">
         <div layout="column" layout-fill>
           <mat-toolbar>
@@ -87,7 +87,11 @@
             <span flex></span>
             <button mat-icon-button (click)="channelInfo.toggle()"><mat-icon>cancel</mat-icon></button>
           </mat-toolbar>
-          <button mat-button (click)="modifyPriorities()"><mat-icon>compare</mat-icon>Modify Priority</button>
+          <button class="side-button" mat-button (click)="modifyPriorities()"><mat-icon class="icon-align">compare</mat-icon>Modify Priority</button>
+          <button class="side-button" mat-button (click)="openTab('https://slack.com/')"><mat-icon class="icon-align">message</mat-icon>via Slack <span class="unread-badge">2</span></button>
+          <button class="side-button" mat-button (click)="openTab('https://messenger.com')"><mat-icon class="icon-align">question_answer</mat-icon>via FB Messenger <span class="unread-badge">3</span></button>
+          <button class="side-button" mat-button (click)="openTab('https://www.whatsapp.com')"><mat-icon class="icon-align">speaker_notes</mat-icon>via WhatApp <span class="unread-badge">1</span></button>
+          <button class="side-button" mat-button (click)="openTab('https://mail.google.com')"><mat-icon class="icon-align">email</mat-icon>via Gmail <span class="unread-badge">7</span></button>
         </div>
       </mat-sidenav>
      <mat-list>

@@ -109,4 +109,9 @@ export class MessagesComponent implements AfterViewInit, OnInit {
         [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
     }
   }
+
+  openTab(url: string) {
+    window.open(url, '_blank');
+  }
+
 }
