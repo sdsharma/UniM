@@ -24,6 +24,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   workFilter: boolean = false;
   homeFilter: boolean = false;
   importantFilter: boolean = false;
+  newLabels: string[] = [];
 
   randusers:string[] =["John Jacobs", "Jasmin Zieman", "Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell", "Gabrielle Newson", "Jenna Mclellan", "Tonya Dominick", "Joselyn Albritton", "Darcie Mayton", "Lilly Beller","Buford Moor", "Michel Lookabaugh", "Mao Ardis", "Senaida Coughlan", "Pat Lowenstein",  "Rima Ackerson","Sally Arnone ", "Elwood Guyer" ];
   randomwords:string[] = ["Lyricalness", "Supersanguine","Obeyingly","Zygomatic","Nonconfirming","Bombproof","Proinvestment","Grime","Swerve","Quebrada","Botanomancy","Klister","Hackeries","Nondedication","Goriest","Unbreachable","Alternator","Abstemiousness","Incentive","Devouringness"];
@@ -57,18 +58,17 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   }
 
   openPriorities(): void {
-  	this._dialogService.openConfirm({
-      message: 'Add priorities from here',
-      disableClose: false,
+    this._dialogService.openPrompt({
+      message: 'Create a new label from here',
+      disableClose: false, 
       viewContainerRef: this._viewContainerRef,
-      title: 'Add Priority',
+      title: 'Add Label',
+      value: '',
       cancelButton: 'Cancel',
-      acceptButton: 'Save'
-    }).afterClosed().subscribe((accept: boolean) => {
-      if (accept) {
-        // DO SOMETHING
-      } else {
-        // DO SOMETHING ELSE
+      acceptButton: 'Add',
+    }).afterClosed().subscribe((newValue: string) => {
+      if (newValue) {
+        this.newLabels.push(newValue);
       }
     });
   }

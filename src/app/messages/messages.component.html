@@ -37,6 +37,9 @@
       <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="workFilter">Work</mat-checkbox></a>
       <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="homeFilter">Home</mat-checkbox></a>
       <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="importantFilter">Important</mat-checkbox></a>
+      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
+          <a mat-list-item *ngIf="!smartMode"><mat-checkbox>{{newLabels[i]}}</mat-checkbox></a>
+      </ng-template>
       <mat-divider *ngIf="!smartMode"></mat-divider>
       <span *ngIf="smartMode || workFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">WORK</h3>
@@ -74,7 +77,13 @@
             <mat-icon class="tc-amber-800">fiber_new</mat-icon>
           </a>
         </ng-template>
+        <mat-divider></mat-divider>
       </span>
+      <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
+          <h3 mat-subheader *ngIf="!smartMode && (!workFilter && !homeFilter && !importantFilter)">{{newLabels[i]}}</h3>
+          <mat-divider></mat-divider>
+      </ng-template>
+
     </mat-nav-list>
   <a mat-fab td-sidenav-content color="accent" class="mat-fab-position-bottom-right fab-new" (click)="!media.query('gt-sm') && navList.close(); handleNewMessage()"> 
     <mat-icon>add</mat-icon>
