@@ -47,7 +47,7 @@
       <span *ngIf="smartMode || workFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">WORK</h3>
         <h3 mat-subheader *ngIf="smartMode">HIGH PRIORITY</h3>
-          <a mat-list-item *ngFor="let user of firstUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(randusers[i]); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item *ngFor="let user of firstUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(firstUsers[i]); !media.query('gt-sm') && navList.close()">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[i]}}</p>
@@ -58,7 +58,7 @@
       <span *ngIf="smartMode || homeFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">HOME</h3>
         <h3 mat-subheader *ngIf="smartMode">MEDIUM PRIORITY</h3>
-          <a mat-list-item *ngFor="let user of secondUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(randusers[i + 2]); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item *ngFor="let user of secondUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(secondUsers[i]); !media.query('gt-sm') && navList.close()">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i + 2}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[i + 2]}}</p>
@@ -68,7 +68,7 @@
       <span *ngIf="smartMode || importantFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">IMPORTANT</h3>
         <h3 mat-subheader *ngIf="smartMode">LOW PRIORITY</h3>
-          <a mat-list-item *ngFor="let user of thirdUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(randusers[i + 6]); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item *ngFor="let user of thirdUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(thirdUsers[i]); !media.query('gt-sm') && navList.close()">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[i + 6]}}</p>
