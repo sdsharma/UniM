@@ -81,7 +81,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
 
   logout(): void {
   	this.store.dispatch({ type: ActionTypes.LOGOUT, payload: null });
-    this.router.navigate(['login']);
+    this.router.navigate(['UniM/dist2/login']);
   }
 
   sendMessage(evt): void {
