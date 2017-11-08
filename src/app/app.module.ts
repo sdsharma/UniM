@@ -19,6 +19,7 @@ import { LoginComponent } from "./login/login.component";
 import { ROUTING } from "./app.routing";
 import { AccessControlGuard } from './shared/guards/accesscontrol.service';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import {MatRadioModule} from '@angular/material';
 
 const reducers = {
   userState: UserReducer
@@ -59,7 +60,8 @@ export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
     effects,
     ROUTING,
     ReactiveFormsModule,
-    FilterPipeModule
+    FilterPipeModule,
+    MatRadioModule
   ],
   providers: [AccessControlGuard],
   bootstrap: [AppComponent]

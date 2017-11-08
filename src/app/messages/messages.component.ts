@@ -30,7 +30,9 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   currentPlatform: string = "WhatsApp";
   searchRecipients: string = '';
 
-  randusers:string[] =["Dhruhin Kurli", "Jasmin Zieman", "Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell", "Gabrielle Newson", "Jenna Mclellan", "Tonya Dominick", "Joselyn Albritton", "Darcie Mayton", "Lilly Beller","Buford Moor", "Michel Lookabaugh", "Mao Ardis", "Senaida Coughlan", "Pat Lowenstein",  "Rima Ackerson","Sally Arnone ", "Elwood Guyer" ];
+  firstUsers:string[] = ["Dhruhin Kurli", "Jasmin Zieman"];
+  secondUsers:string[] = ["Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell"];
+  thirdUsers:string[] = ["Gabrielle Newson", "Jenna Mclellan", "Tonya Dominick", "Joselyn Albritton", "Darcie Mayton", "Lilly Beller","Buford Moor"];
   randomwords:string[] = ["Lyricalness", "Supersanguine","Obeyingly","Zygomatic","Nonconfirming","Bombproof","Proinvestment","Grime","Swerve","Quebrada","Botanomancy","Klister","Hackeries","Nondedication","Goriest","Unbreachable","Alternator","Abstemiousness","Incentive","Devouringness"];
   messages:any[] = [{message: "Hey there", user: true}, {message: "Whats up", user: false}, {message: "You know", user: true}, {message: "Gains?", user: false}, {message: "Those a fantastic", user: true}, {message: "Yes they are", user: false}, {message: "I like to workout 10x a week", user: true}, {message: "That's probably not good for you", user: false}, {message: "Oh its ok steroids help a lot", user: true}, {message: "That's not a good idea", user: false}, {message: "Yeah probably not", user: true}];
   constructor(private _changeDetectorRef: ChangeDetectorRef,
