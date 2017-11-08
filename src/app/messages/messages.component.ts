@@ -28,6 +28,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   searchTerm: any = {message: ''};
   currentView: string = "Dhruhin Kurli";
   currentPlatform: string = "WhatsApp";
+  searchRecipients: string = '';
 
   randusers:string[] =["John Jacobs", "Jasmin Zieman", "Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell", "Gabrielle Newson", "Jenna Mclellan", "Tonya Dominick", "Joselyn Albritton", "Darcie Mayton", "Lilly Beller","Buford Moor", "Michel Lookabaugh", "Mao Ardis", "Senaida Coughlan", "Pat Lowenstein",  "Rima Ackerson","Sally Arnone ", "Elwood Guyer" ];
   randomwords:string[] = ["Lyricalness", "Supersanguine","Obeyingly","Zygomatic","Nonconfirming","Bombproof","Proinvestment","Grime","Swerve","Quebrada","Botanomancy","Klister","Hackeries","Nondedication","Goriest","Unbreachable","Alternator","Abstemiousness","Incentive","Devouringness"];
@@ -115,8 +116,10 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   }
 
   switchPlatform(platform: string) {
-    this.shuffleMessages(this.currentView);
-    this.currentPlatform = platform;
+    if(this.currentPlatform != platform){
+      this.shuffleMessages(this.currentView);
+      this.currentPlatform = platform;
+    }
   }
 
 }
