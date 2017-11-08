@@ -28,7 +28,7 @@
       </button>
     <span>Dhruhin Kurli via WhatsApp</span>
     <span flex></span>
-    <td-search-box #searchBox class="pull-top-sm pull-bottom-sm" placeholder="" (search)="searchTerm = $event">
+    <td-search-box #searchBox class="pull-top-sm pull-bottom-sm" placeholder="" [debounce]="100" (searchDebounce)="searchTerm.message = $event" (search)="searchTerm.message = $event" (clear)="searchTerm.message = ''">
     </td-search-box>
     <button mat-icon-button matTooltip="Show User Details" (click)="channelInfo.toggle()"><mat-icon>more_vert</mat-icon></button>
   </div>
@@ -104,16 +104,14 @@
         </div>
       </mat-sidenav>
      <mat-list>
-        <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="messages | filterBy: searchTerm">
-            <mat-list-item>
-              <mat-chip-list *ngIf="i % 2 == 0" class="user-message">
-                <mat-chip color="accent" selected="true">{{messages[i]}}</mat-chip>
+            <mat-list-item *ngFor="let message of messages | filterBy: searchTerm">
+              <mat-chip-list *ngIf="message.user == true" class="user-message">
+                <mat-chip color="accent" selected="true">{{message.message}}</mat-chip>
               </mat-chip-list>
-              <mat-chip-list *ngIf="i % 2 == 1">
-                <mat-chip color="primary" selected="true">{{messages[i]}}</mat-chip>
+              <mat-chip-list *ngIf="message.user == false">
+                <mat-chip color="primary" selected="true">{{message.message}}</mat-chip>
               </mat-chip-list>
             </mat-list-item>
-        </ng-template>
       </mat-list>
     </mat-sidenav-container>
     <td-layout-footer-inner class="padding-align">

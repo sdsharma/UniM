@@ -25,11 +25,11 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   homeFilter: boolean = false;
   importantFilter: boolean = false;
   newLabels: string[] = [];
-  searchTerm: string = '';
+  searchTerm: any = {message: ''};
 
   randusers:string[] =["John Jacobs", "Jasmin Zieman", "Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell", "Gabrielle Newson", "Jenna Mclellan", "Tonya Dominick", "Joselyn Albritton", "Darcie Mayton", "Lilly Beller","Buford Moor", "Michel Lookabaugh", "Mao Ardis", "Senaida Coughlan", "Pat Lowenstein",  "Rima Ackerson","Sally Arnone ", "Elwood Guyer" ];
   randomwords:string[] = ["Lyricalness", "Supersanguine","Obeyingly","Zygomatic","Nonconfirming","Bombproof","Proinvestment","Grime","Swerve","Quebrada","Botanomancy","Klister","Hackeries","Nondedication","Goriest","Unbreachable","Alternator","Abstemiousness","Incentive","Devouringness"];
-  messages:string[] = ["Hey there", "Whats up", "You know", "Gains?", "Those a fantastic", "Yes they are", "I like to workout 10x a week", "That's probably not good for you", "Oh its ok steroids help a lot", "That's not a good idea", "Yeah probably not"];
+  messages:any[] = [{message: "Hey there", user: true}, {message: "Whats up", user: false}, {message: "You know", user: true}, {message: "Gains?", user: false}, {message: "Those a fantastic", user: true}, {message: "Yes they are", user: false}, {message: "I like to workout 10x a week", user: true}, {message: "That's probably not good for you", user: false}, {message: "Oh its ok steroids help a lot", user: true}, {message: "That's not a good idea", user: false}, {message: "Yeah probably not", user: true}];
   constructor(private _changeDetectorRef: ChangeDetectorRef,
               public media: TdMediaService,
               private _iconRegistry: MatIconRegistry,
@@ -99,7 +99,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   sendMessage(evt): void {
     let msg = document.getElementById('messageInput').getElementsByTagName('input')[0].value;
     if(msg != ""){
-      this.messages.push(msg);
+      this.messages.push({message: msg, user: true});
       document.getElementById('messageInput').getElementsByTagName('input')[0].value = "";
     }
   }
