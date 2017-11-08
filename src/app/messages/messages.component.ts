@@ -104,6 +104,9 @@ export class MessagesComponent implements AfterViewInit, OnInit {
     if(msg != ""){
       this.messages.push({message: msg, user: true});
       document.getElementById('messageInput').getElementsByTagName('input')[0].value = "";
+      setTimeout(() => {
+        document.getElementById('messageList').lastElementChild.scrollIntoView(false);
+      });
     }
   }
 

@@ -100,7 +100,7 @@
           <button class="side-button" mat-button (click)="switchPlatform('Gmail')"><mat-icon class="icon-align">email</mat-icon>via Gmail <span class="unread-badge">7</span></button>
         </div>
       </mat-sidenav>
-     <mat-list>
+     <mat-list id="messageList">
             <mat-list-item *ngFor="let message of messages | filterBy: searchTerm">
               <mat-chip-list *ngIf="message.user == true" class="user-message">
                 <mat-chip color="accent" selected="true">{{message.message}}</mat-chip>
