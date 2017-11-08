@@ -8,7 +8,7 @@ import { AccessControlGuard } from './shared/guards/accesscontrol.service';
 
 
 export const ROUTES: Routes = [
-    {path: '', redirectTo: 'login', pathMatch: 'full'},
+    {path: 'UniM/dist2', redirectTo: 'login', pathMatch: 'full'},
     {path: 'messages', component: MessagesComponent, canActivate: [AccessControlGuard]},
     {path: 'login', component: LoginComponent}
 ];
