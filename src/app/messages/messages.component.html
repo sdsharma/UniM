@@ -26,7 +26,7 @@
     <button mat-icon-button tdLayoutNavListOpen [hideWhenOpened]="true">
         <mat-icon>arrow_back</mat-icon>
       </button>
-    <span>Dhruhin Kurli via WhatsApp</span>
+    <span>{{currentView}} via {{currentPlatform}}</span>
     <span flex></span>
     <td-search-box #searchBox class="pull-top-sm pull-bottom-sm" placeholder="" [debounce]="100" (searchDebounce)="searchTerm.message = $event" (search)="searchTerm.message = $event" (clear)="searchTerm.message = ''">
     </td-search-box>
@@ -45,7 +45,7 @@
         <h3 mat-subheader *ngIf="!smartMode">WORK</h3>
         <h3 mat-subheader *ngIf="smartMode">HIGH PRIORITY</h3>
         <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1]">
-          <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item (click)="shuffleMessages(randusers[i]); !media.query('gt-sm') && navList.close()">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{randusers[i]}}</h3>
             <p mat-line>{{randomwords[i]}}</p>
@@ -58,7 +58,7 @@
         <h3 mat-subheader *ngIf="!smartMode">HOME</h3>
         <h3 mat-subheader *ngIf="smartMode">MEDIUM PRIORITY</h3>
         <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3]">
-          <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item (click)="shuffleMessages(randusers[i + 2]); !media.query('gt-sm') && navList.close()">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i + 2}}" />
             <h3 mat-line>{{randusers[i + 2]}}</h3>
             <p mat-line>{{randomwords[i + 2]}}</p>
@@ -70,7 +70,7 @@
         <h3 mat-subheader *ngIf="!smartMode">IMPORTANT</h3>
         <h3 mat-subheader *ngIf="smartMode">LOW PRIORITY</h3>
         <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6]">
-          <a mat-list-item (click)="shuffleMessages(); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item (click)="shuffleMessages(randusers[i + 6]); !media.query('gt-sm') && navList.close()">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{randusers[i + 6]}}</h3>
             <p mat-line>{{randomwords[i + 6]}}</p>
@@ -97,10 +97,10 @@
             <button mat-icon-button (click)="channelInfo.toggle()"><mat-icon>cancel</mat-icon></button>
           </mat-toolbar>
           <button class="side-button" mat-button (click)="modifyPriorities()"><mat-icon class="icon-align">compare</mat-icon>Modify Priority</button>
-          <button class="side-button" mat-button (click)="openTab('https://slack.com/')"><mat-icon class="icon-align">message</mat-icon>via Slack <span class="unread-badge">2</span></button>
-          <button class="side-button" mat-button (click)="openTab('https://messenger.com')"><mat-icon class="icon-align">question_answer</mat-icon>via FB Messenger <span class="unread-badge">3</span></button>
-          <button class="side-button" mat-button (click)="openTab('https://www.whatsapp.com')"><mat-icon class="icon-align">speaker_notes</mat-icon>via WhatApp <span class="unread-badge">1</span></button>
-          <button class="side-button" mat-button (click)="openTab('https://mail.google.com')"><mat-icon class="icon-align">email</mat-icon>via Gmail <span class="unread-badge">7</span></button>
+          <button class="side-button" mat-button (click)="switchPlatform('Slack')"><mat-icon class="icon-align">message</mat-icon>via Slack <span class="unread-badge">2</span></button>
+          <button class="side-button" mat-button (click)="switchPlatform('FB Messenger')"><mat-icon class="icon-align">question_answer</mat-icon>via FB Messenger <span class="unread-badge">3</span></button>
+          <button class="side-button" mat-button (click)="switchPlatform('WhatsApp')"><mat-icon class="icon-align">speaker_notes</mat-icon>via WhatApp <span class="unread-badge">1</span></button>
+          <button class="side-button" mat-button (click)="switchPlatform('Gmail')"><mat-icon class="icon-align">email</mat-icon>via Gmail <span class="unread-badge">7</span></button>
         </div>
       </mat-sidenav>
      <mat-list>
