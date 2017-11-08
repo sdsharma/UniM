@@ -79,23 +79,6 @@ export class MessagesComponent implements AfterViewInit, OnInit {
     });
   }
 
-  modifyPriorities(): void {
-  	this._dialogService.openConfirm({
-      message: 'Modify priorities from here',
-      disableClose: false,
-      viewContainerRef: this._viewContainerRef,
-      title: 'Modify Priority',
-      cancelButton: 'Cancel',
-      acceptButton: 'Save'
-    }).afterClosed().subscribe((accept: boolean) => {
-      if (accept) {
-        // DO SOMETHING
-      } else {
-        // DO SOMETHING ELSE
-      }
-    });
-  }
-
   logout(): void {
   	this.store.dispatch({ type: ActionTypes.LOGOUT, payload: null });
     this.router.navigate(['login']);
