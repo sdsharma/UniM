@@ -2,3 +2,7 @@
 .mat-form-field-wrapper {
     padding-bottom: 1em !important;
 }
+
+body .push-sm {
+	margin: 0 !important;
+}

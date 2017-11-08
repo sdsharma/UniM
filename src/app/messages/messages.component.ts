@@ -119,7 +119,10 @@ export class MessagesComponent implements AfterViewInit, OnInit {
 
   switchPlatform(platform: string) {
     if(this.currentPlatform != platform){
-      this.shuffleMessages(this.currentView);
+      for (let i = this.messages.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
+      }
       this.currentPlatform = platform;
     }
   }
