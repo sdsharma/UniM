@@ -24,7 +24,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   workFilter: boolean = false;
   homeFilter: boolean = false;
   importantFilter: boolean = false;
-  newLabels: string[] = [];
+  newLabels: any[] = [];
   searchTerm: any = {message: ''};
   currentView: string = "Dhruhin Kurli";
   currentPlatform: string = "WhatsApp";
@@ -87,7 +87,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
       acceptButton: 'Add',
     }).afterClosed().subscribe((newValue: string) => {
       if (newValue) {
-        this.newLabels.push(newValue);
+        this.newLabels.push({title: newValue, values: []});
       }
     });
   }
@@ -155,6 +155,12 @@ export class MessagesComponent implements AfterViewInit, OnInit {
         this.thirdUsers.splice(this.thirdUsers.indexOf(this.currentView), 1);
         this.firstUsers.push(this.currentView);
       }
+      this.newLabels.forEach(label => {
+        if(label.values.indexOf(this.currentView) != -1){
+          label.values.splice(label.values.indexOf(this.currentView), 1);
+          this.firstUsers.push(this.currentView);
+        }
+      });
     }
     else if(e.value == "2"){
       if(this.firstUsers.indexOf(this.currentView) != -1){
@@ -165,6 +171,12 @@ export class MessagesComponent implements AfterViewInit, OnInit {
         this.thirdUsers.splice(this.thirdUsers.indexOf(this.currentView), 1);
         this.secondUsers.push(this.currentView);
       }
+      this.newLabels.forEach(label => {
+        if(label.values.indexOf(this.currentView) != -1){
+          label.values.splice(label.values.indexOf(this.currentView), 1);
+          this.secondUsers.push(this.currentView);
+        }
+      });
     }
     else if(e.value == "3"){
       if(this.firstUsers.indexOf(this.currentView) != -1){
@@ -175,6 +187,29 @@ export class MessagesComponent implements AfterViewInit, OnInit {
         this.secondUsers.splice(this.secondUsers.indexOf(this.currentView), 1);
         this.thirdUsers.push(this.currentView);
       }
+      this.newLabels.forEach(label => {
+        if(label.values.indexOf(this.currentView) != -1){
+          label.values.splice(label.values.indexOf(this.currentView), 1);
+          this.thirdUsers.push(this.currentView);
+        }
+      });
+    }
+    else {
+      if(this.firstUsers.indexOf(this.currentView) != -1){
+        this.firstUsers.splice(this.firstUsers.indexOf(this.currentView), 1);
+      }
+      if(this.secondUsers.indexOf(this.currentView) != -1){
+        this.secondUsers.splice(this.secondUsers.indexOf(this.currentView), 1);
+      }
+      if(this.thirdUsers.indexOf(this.currentView) != -1){
+        this.thirdUsers.splice(this.thirdUsers.indexOf(this.currentView), 1);
+      }
+      this.newLabels.forEach(label => {
+        if(label.values.indexOf(this.currentView) != -1){
+          label.values.splice(label.values.indexOf(this.currentView), 1);
+        }
+      });
+      this.newLabels[parseInt(e.value) - 4].values.push(this.currentView);
     }
   }
 

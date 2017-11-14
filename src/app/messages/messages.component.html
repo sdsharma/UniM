@@ -39,7 +39,7 @@
       <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="homeFilter">Home</mat-checkbox></a>
       <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="importantFilter">Important</mat-checkbox></a>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
-          <a mat-list-item *ngIf="!smartMode"><mat-checkbox>{{newLabels[i]}}</mat-checkbox></a>
+          <a mat-list-item *ngIf="!smartMode"><mat-checkbox>{{newLabels[i].title}}</mat-checkbox></a>
       </ng-template>
       <mat-divider *ngIf="!smartMode"></mat-divider>
       <td-search-box #searchBox class="pull-top-sm pull-bottom-sm" placeholder="Search Recipients" [debounce]="100" (searchDebounce)="searchRecipients = $event" (search)="searchRecipients = $event" (clear)="searchRecipients= ''" [alwaysVisible]="true">
@@ -78,7 +78,13 @@
         <mat-divider></mat-divider>
       </span>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
-          <h3 mat-subheader *ngIf="!smartMode && (!workFilter && !homeFilter && !importantFilter)">{{newLabels[i]}}</h3>
+          <h3 mat-subheader *ngIf="!smartMode && (!workFilter && !homeFilter && !importantFilter)">{{newLabels[i].title}}</h3>
+          <a mat-list-item *ngFor="let user of newLabels[i].values | filterBy: searchRecipients; let y = index" (click)="shuffleMessages(newLabels[i].values[y].name, y); !media.query('gt-sm') && navList.close(); currentList = i + 4">
+            <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
+            <h3 mat-line>{{user}}</h3>
+            <p mat-line>{{randomwords[y]}}</p>
+            <mat-icon class="tc-amber-800">fiber_new</mat-icon>
+          </a>
           <mat-divider></mat-divider>
       </ng-template>
 
@@ -109,7 +115,7 @@
             <mat-radio-button value="3" [checked]="currentList == 3">Important</mat-radio-button>
             <br />
             <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
-              <mat-radio-button value={{i+3}}>{{newLabels[i]}}</mat-radio-button>
+              <mat-radio-button value={{i+4}}>{{newLabels[i].title}}</mat-radio-button>
               <br />
           </ng-template>
           </mat-radio-group>
