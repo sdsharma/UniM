@@ -31,6 +31,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   searchRecipients: string = '';
   currentImage: number = 0;
   currentList: number = 1;
+  messageText: string = '';
 
   firstUsers:string[] = ["Dhruhin Kurli", "Jasmin Zieman"];
   secondUsers:string[] = ["Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell"];
@@ -113,11 +114,11 @@ export class MessagesComponent implements AfterViewInit, OnInit {
     this.router.navigate(['login']);
   }
 
-  sendMessage(evt): void {
-    let msg = document.getElementById('messageInput').getElementsByTagName('input')[0].value;
-    if(msg != ""){
-      this.messages.push({message: msg, user: true});
-      document.getElementById('messageInput').getElementsByTagName('input')[0].value = "";
+  sendMessage(): void {
+    // let msg = document.getElementById('messageInput').getElementsByTagName('input')[0].value;
+    if(this.messageText != ""){
+      this.messages.push({message: this.messageText, user: true});
+      this.messageText = "";
       setTimeout(() => {
         document.getElementById('messageList').lastElementChild.scrollIntoView(false);
       });

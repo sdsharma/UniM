@@ -139,9 +139,9 @@
             <button mat-icon-button matTooltip="Attach File" matTooltipPosition="after"><mat-icon>attach_file</mat-icon></button>
           </td-file-input>
         </div>
-          <emoji-input [popupAnchor]="'bottom'" flex id="messageInput"></emoji-input>
+          <emoji-input [popupAnchor]="'bottom'" flex id="messageInput" [(model)]="messageText"></emoji-input>
         <div>
-          <button mat-icon-button matTooltip="Send" matTooltipPosition="before" (click)="sendMessage($event)"><mat-icon>send</mat-icon></button>
+          <button mat-icon-button matTooltip="Send" matTooltipPosition="before" (click)="sendMessage()"><mat-icon>send</mat-icon></button>
         </div>
       </div>
     </td-layout-footer-inner>
