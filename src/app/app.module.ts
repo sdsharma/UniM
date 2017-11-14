@@ -16,6 +16,7 @@ import { appEffects } from './store/effects';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MessagesComponent } from "./messages/messages.component";
 import { LoginComponent } from "./login/login.component";
+import { LinkComponent } from "./link/link.component";
 import { ROUTING } from "./app.routing";
 import { AccessControlGuard } from './shared/guards/accesscontrol.service';
 import { FilterPipeModule } from 'ngx-filter-pipe';
@@ -39,7 +40,8 @@ export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
   declarations: [
     AppComponent,
     MessagesComponent,
-    LoginComponent
+    LoginComponent,
+    LinkComponent
   ],
   imports: [
     BrowserModule,

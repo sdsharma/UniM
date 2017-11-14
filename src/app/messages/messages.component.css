@@ -70,3 +70,10 @@
 	margin-left: 16px;
 	margin-bottom: 0px;
 }
+
+.img-av {
+	margin: 20px auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}

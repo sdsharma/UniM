@@ -11,6 +11,7 @@
       <a mat-list-item href="https://www.whatsapp.com" target="_blank"><mat-icon>speaker_notes</mat-icon>WhatsApp</a>
       <a mat-list-item href="https://mail.google.com" target="_blank"><mat-icon>email</mat-icon>Gmail</a>
       <mat-divider></mat-divider>
+      <a mat-list-item (click)="openEdit()"><mat-icon>mode_edit</mat-icon>Edit Profile</a>
       <a mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Sign Out</a>
     </mat-nav-list>
   </td-navigation-drawer>
@@ -47,7 +48,7 @@
       <span *ngIf="smartMode || workFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">WORK</h3>
         <h3 mat-subheader *ngIf="smartMode">HIGH PRIORITY</h3>
-          <a mat-list-item *ngFor="let user of firstUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(firstUsers[i]); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item *ngFor="let user of firstUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(firstUsers[i], i); !media.query('gt-sm') && navList.close()">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[i]}}</p>
@@ -58,7 +59,7 @@
       <span *ngIf="smartMode || homeFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">HOME</h3>
         <h3 mat-subheader *ngIf="smartMode">MEDIUM PRIORITY</h3>
-          <a mat-list-item *ngFor="let user of secondUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(secondUsers[i]); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item *ngFor="let user of secondUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(secondUsers[i], i); !media.query('gt-sm') && navList.close()">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i + 2}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[i + 2]}}</p>
@@ -68,7 +69,7 @@
       <span *ngIf="smartMode || importantFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">IMPORTANT</h3>
         <h3 mat-subheader *ngIf="smartMode">LOW PRIORITY</h3>
-          <a mat-list-item *ngFor="let user of thirdUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(thirdUsers[i]); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item *ngFor="let user of thirdUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(thirdUsers[i], i); !media.query('gt-sm') && navList.close()">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[i + 6]}}</p>
@@ -93,6 +94,7 @@
             <span flex></span>
             <button mat-icon-button (click)="channelInfo.toggle()"><mat-icon>cancel</mat-icon></button>
           </mat-toolbar>
+          <img class="img-av" src="http://lorempixel.com/100/100/people/{{currentImage}}" />
           <button class="side-button" mat-button (click)="switchPlatform('Slack')"><mat-icon class="icon-align">message</mat-icon>via Slack <span class="unread-badge">2</span></button>
           <button class="side-button" mat-button (click)="switchPlatform('FB Messenger')"><mat-icon class="icon-align">question_answer</mat-icon>via FB Messenger <span class="unread-badge">3</span></button>
           <button class="side-button" mat-button (click)="switchPlatform('WhatsApp')"><mat-icon class="icon-align">speaker_notes</mat-icon>via WhatApp <span class="unread-badge">1</span></button>

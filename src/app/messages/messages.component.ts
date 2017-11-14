@@ -29,6 +29,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   currentView: string = "Dhruhin Kurli";
   currentPlatform: string = "WhatsApp";
   searchRecipients: string = '';
+  currentImage: number = 0;
 
   firstUsers:string[] = ["Dhruhin Kurli", "Jasmin Zieman"];
   secondUsers:string[] = ["Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell"];
@@ -49,6 +50,17 @@ export class MessagesComponent implements AfterViewInit, OnInit {
       this.media.broadcast();
       this._changeDetectorRef.detectChanges();
     });
+
+    setTimeout(() => {
+      this._dialogService.openConfirm({
+        message: 'Move ' + this.currentView + ' to a higher priority?',
+        disableClose: false,
+        viewContainerRef: this._viewContainerRef,
+        title: 'Change Priority',
+        cancelButton: 'Cancel',
+        acceptButton: 'Accept',
+      }).afterClosed().subscribe((accept: boolean) => {});
+    }, 20000);
   }
 
   ngOnInit(): void {
@@ -79,9 +91,25 @@ export class MessagesComponent implements AfterViewInit, OnInit {
     });
   }
 
+  openEdit(): void {
+    this._dialogService.openPrompt({
+      message: 'Edit your email',
+      disableClose: false, 
+      viewContainerRef: this._viewContainerRef,
+      title: 'Change Email',
+      value: this.userData.email,
+      cancelButton: 'Cancel',
+      acceptButton: 'Save',
+    }).afterClosed().subscribe((newValue: string) => {
+      if (newValue) {
+        this.userData.email = newValue;
+      }
+    });
+  }
+
   logout(): void {
   	this.store.dispatch({ type: ActionTypes.LOGOUT, payload: null });
-    this.router.navigate(['UniM/dist2/login']);
+    this.router.navigate(['login']);
   }
 
   sendMessage(evt): void {
@@ -95,9 +123,10 @@ export class MessagesComponent implements AfterViewInit, OnInit {
     }
   }
 
-  shuffleMessages(name: string):void {
+  shuffleMessages(name: string, index: number):void {
     if(this.currentView != name){
       this.currentView = name;
+      this.currentImage = index;
       for (let i = this.messages.length - 1; i > 0; i--) {
           let j = Math.floor(Math.random() * (i + 1));
           [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];

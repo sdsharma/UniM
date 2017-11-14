@@ -20,7 +20,7 @@ export class AccessControlGuard implements CanActivate {
     // canActivate gets fired activated on loading of the parent route and once on the hard reload of any child routes
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if(!this.loggedIn && !state.url.includes('login')){
-            this.router.navigate(['UniM/dist2/login']);
+            this.router.navigate(['login']);
         } else {
             return true;
         }

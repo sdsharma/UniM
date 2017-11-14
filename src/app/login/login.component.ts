@@ -38,8 +38,11 @@ export class LoginComponent implements OnInit {
         return state.userState;
     }).subscribe((userState: UserState) => {
         this.loggedIn = userState.loggedIn;
-        if(this.loggedIn == true){
-          this.router.navigate(['UniM/dist2/messages']);
+        if(this.loggedIn == true && this.register == false){
+          this.router.navigate(['messages']);
+        }
+        if(this.loggedIn == true && this.register == true) {
+          this.router.navigate(['link']);
         }
     });
   }
