@@ -48,7 +48,7 @@
       <span *ngIf="smartMode || workFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">WORK</h3>
         <h3 mat-subheader *ngIf="smartMode">HIGH PRIORITY</h3>
-          <a mat-list-item *ngFor="let user of firstUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(firstUsers[i], i); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item *ngFor="let user of firstUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(firstUsers[i], i); !media.query('gt-sm') && navList.close(); currentList = 2">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[i]}}</p>
@@ -59,7 +59,7 @@
       <span *ngIf="smartMode || homeFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">HOME</h3>
         <h3 mat-subheader *ngIf="smartMode">MEDIUM PRIORITY</h3>
-          <a mat-list-item *ngFor="let user of secondUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(secondUsers[i], i); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item *ngFor="let user of secondUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(secondUsers[i], i); !media.query('gt-sm') && navList.close(); currentList = 2">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i + 2}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[i + 2]}}</p>
@@ -69,7 +69,7 @@
       <span *ngIf="smartMode || importantFilter || (!workFilter && !homeFilter && !importantFilter)">
         <h3 mat-subheader *ngIf="!smartMode">IMPORTANT</h3>
         <h3 mat-subheader *ngIf="smartMode">LOW PRIORITY</h3>
-          <a mat-list-item *ngFor="let user of thirdUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(thirdUsers[i], i); !media.query('gt-sm') && navList.close()">
+          <a mat-list-item *ngFor="let user of thirdUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(thirdUsers[i], i); !media.query('gt-sm') && navList.close(); currentList = 3">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[i + 6]}}</p>
@@ -102,11 +102,11 @@
           <mat-divider></mat-divider>
           <h5 class="label-change-header" *ngIf="!smartMode">CHANGE LABEL</h5>
           <mat-radio-group class="label-change-header" (change)="changeLabel($event)">
-            <mat-radio-button value="1" [checked]="true">Work</mat-radio-button>
+            <mat-radio-button value="1" [checked]="currentList == 1">Work</mat-radio-button>
             <br />
-            <mat-radio-button value="2">Home</mat-radio-button>
+            <mat-radio-button value="2" [checked]="currentList == 2">Home</mat-radio-button>
             <br />
-            <mat-radio-button value="3">Important</mat-radio-button>
+            <mat-radio-button value="3" [checked]="currentList == 3">Important</mat-radio-button>
             <br />
             <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
               <mat-radio-button value={{i+3}}>{{newLabels[i]}}</mat-radio-button>

@@ -30,6 +30,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   currentPlatform: string = "WhatsApp";
   searchRecipients: string = '';
   currentImage: number = 0;
+  currentList: number = 1;
 
   firstUsers:string[] = ["Dhruhin Kurli", "Jasmin Zieman"];
   secondUsers:string[] = ["Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell"];
