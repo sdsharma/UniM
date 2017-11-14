@@ -79,7 +79,7 @@
       </span>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
           <h3 mat-subheader *ngIf="!smartMode && (!workFilter && !homeFilter && !importantFilter)">{{newLabels[i].title}}</h3>
-          <a mat-list-item *ngFor="let user of newLabels[i].values | filterBy: searchRecipients; let y = index" (click)="shuffleMessages(newLabels[i].values[y].name, y); !media.query('gt-sm') && navList.close(); currentList = i + 4">
+          <a mat-list-item *ngFor="let user of newLabels[i].values | filterBy: searchRecipients; let y = index" (click)="shuffleMessages(user, y); !media.query('gt-sm') && navList.close(); currentList = i + 4">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{user}}</h3>
             <p mat-line>{{randomwords[y]}}</p>
