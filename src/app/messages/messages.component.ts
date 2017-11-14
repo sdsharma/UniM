@@ -144,4 +144,37 @@ export class MessagesComponent implements AfterViewInit, OnInit {
     }
   }
 
+  changeLabel(e: any){
+    if(e.value == "1"){
+      if(this.secondUsers.indexOf(this.currentView) != -1){
+        this.secondUsers.splice(this.secondUsers.indexOf(this.currentView), 1);
+        this.firstUsers.push(this.currentView);
+      }
+      if(this.thirdUsers.indexOf(this.currentView) != -1){
+        this.thirdUsers.splice(this.thirdUsers.indexOf(this.currentView), 1);
+        this.firstUsers.push(this.currentView);
+      }
+    }
+    else if(e.value == "2"){
+      if(this.firstUsers.indexOf(this.currentView) != -1){
+        this.firstUsers.splice(this.firstUsers.indexOf(this.currentView), 1);
+        this.secondUsers.push(this.currentView);
+      }
+      if(this.thirdUsers.indexOf(this.currentView) != -1){
+        this.thirdUsers.splice(this.thirdUsers.indexOf(this.currentView), 1);
+        this.secondUsers.push(this.currentView);
+      }
+    }
+    else if(e.value == "3"){
+      if(this.firstUsers.indexOf(this.currentView) != -1){
+        this.firstUsers.splice(this.firstUsers.indexOf(this.currentView), 1);
+        this.thirdUsers.push(this.currentView);
+      }
+      if(this.secondUsers.indexOf(this.currentView) != -1){
+        this.secondUsers.splice(this.secondUsers.indexOf(this.currentView), 1);
+        this.thirdUsers.push(this.currentView);
+      }
+    }
+  }
+
 }
