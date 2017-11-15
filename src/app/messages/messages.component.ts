@@ -8,6 +8,9 @@ import { AppState, UserState } from '../store/state';
 import { ActionTypes } from '../store/actions';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-messages',
@@ -32,11 +35,15 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   currentImage: number = 0;
   currentList: number = 1;
   messageText: string = '';
+  showNew: boolean = false;
 
   firstUsers:string[] = ["Dhruhin Kurli", "Jasmin Zieman"];
   secondUsers:string[] = ["Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell"];
   thirdUsers:string[] = ["Gabrielle Newson", "Jenna Mclellan", "Tonya Dominick", "Joselyn Albritton", "Darcie Mayton", "Lilly Beller","Buford Moor"];
   randomwords:string[] = ["Lyricalness", "Supersanguine","Obeyingly","Zygomatic","Nonconfirming","Bombproof","Proinvestment","Grime","Swerve","Quebrada","Botanomancy","Klister","Hackeries","Nondedication","Goriest","Unbreachable","Alternator","Abstemiousness","Incentive","Devouringness"];
+  options:string[] = [];
+  myControl: FormControl = new FormControl('');
+  filteredOptions: Observable<string[]>;
   messages:any[] = [{message: "Hey there", user: true}, {message: "Whats up", user: false}, {message: "You know", user: true}, {message: "Gains?", user: false}, {message: "Those a fantastic", user: true}, {message: "Yes they are", user: false}, {message: "I like to workout 10x a week", user: true}, {message: "That's probably not good for you", user: false}, {message: "Oh its ok steroids help a lot", user: true}, {message: "That's not a good idea", user: false}, {message: "Yeah probably not", user: true}];
   constructor(private _changeDetectorRef: ChangeDetectorRef,
               public media: TdMediaService,
@@ -54,14 +61,16 @@ export class MessagesComponent implements AfterViewInit, OnInit {
     });
 
     setTimeout(() => {
-      this._dialogService.openConfirm({
-        message: 'Move ' + this.currentView + ' to a higher priority?',
-        disableClose: false,
-        viewContainerRef: this._viewContainerRef,
-        title: 'Change Priority',
-        cancelButton: 'Cancel',
-        acceptButton: 'Accept',
-      }).afterClosed().subscribe((accept: boolean) => {});
+      if(this.currentView != ''){
+        this._dialogService.openConfirm({
+          message: 'Move ' + this.currentView + ' to a higher priority?',
+          disableClose: false,
+          viewContainerRef: this._viewContainerRef,
+          title: 'Change Priority',
+          cancelButton: 'Cancel',
+          acceptButton: 'Accept',
+        }).afterClosed().subscribe((accept: boolean) => {});
+      }
     }, 20000);
   }
 
@@ -71,10 +80,19 @@ export class MessagesComponent implements AfterViewInit, OnInit {
     }).subscribe((userState: UserState) => {
         this.userData = userState.userData;
     });
+    this.options = this.firstUsers.concat(this.secondUsers).concat(this.thirdUsers);
+    this.filteredOptions = this.myControl.valueChanges
+         .startWith(null)
+         .map(val => val ? this.filter(val) : this.options.slice());
   }
 
   handleNewMessage(): void {
-  	document.getElementById('messageInput').getElementsByTagName('input')[0].focus();
+    this.currentView = '';
+    this.showNew = true;
+    this.myControl.reset();
+    setTimeout(()=>{
+      document.getElementById('newMessage').focus();
+    });
   }
 
   openPriorities(): void {
@@ -212,6 +230,22 @@ export class MessagesComponent implements AfterViewInit, OnInit {
       });
       this.newLabels[parseInt(e.value) - 4].values.push(this.currentView);
     }
+  }
+
+  filter(val: string): string[] {
+      return this.options.filter(option =>
+        option.toLowerCase().indexOf(val.toLowerCase()) === 0);
+   }
+
+  blurAuto(): void {
+    setTimeout(()=> {
+      this.currentView = this.myControl.value;
+      this.showNew = false;
+      for (let i = this.messages.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
+      }
+    }, 300);
   }
 
 }
