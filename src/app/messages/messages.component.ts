@@ -135,7 +135,6 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   }
 
   sendMessage(): void {
-    // let msg = document.getElementById('messageInput').getElementsByTagName('input')[0].value;
     if(this.messageText != ""){
       this.messages.push({message: this.messageText, user: true});
       this.messageText = "";
@@ -252,5 +251,6 @@ export class MessagesComponent implements AfterViewInit, OnInit {
 
   selectEvent(evt) {
     this.messageText = "📎 " + this.files.name;
+    this.sendMessage();
   }
 }

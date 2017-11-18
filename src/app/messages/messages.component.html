@@ -117,7 +117,7 @@
           <button class="side-button" mat-button (click)="switchPlatform('Gmail')"><mat-icon class="icon-align">email</mat-icon>via Gmail <span class="unread-badge">7</span></button>
           <mat-divider></mat-divider>
           <h5 class="label-change-header" *ngIf="!smartMode">CHANGE LABEL</h5>
-          <mat-radio-group class="label-change-header" (change)="changeLabel($event)">
+          <mat-radio-group class="label-change-header" (change)="changeLabel($event)" *ngIf="!smartMode">
             <mat-radio-button value="1" [checked]="currentList == 1">Work</mat-radio-button>
             <br />
             <mat-radio-button value="2" [checked]="currentList == 2">Home</mat-radio-button>
