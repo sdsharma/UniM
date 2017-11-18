@@ -87,8 +87,10 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   }
 
   handleNewMessage(): void {
+    if(this.showNew != true){
+      this.showNew = true;
+    }
     this.currentView = '';
-    this.showNew = true;
     this.myControl.reset();
     setTimeout(()=>{
       document.getElementById('newMessage').focus();
@@ -239,12 +241,12 @@ export class MessagesComponent implements AfterViewInit, OnInit {
 
   blurAuto(): void {
     setTimeout(()=> {
-      this.currentView = this.myControl.value;
-      this.showNew = false;
-      for (let i = this.messages.length - 1; i > 0; i--) {
-          let j = Math.floor(Math.random() * (i + 1));
-          [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
-      }
+        this.currentView = this.myControl.value;
+        this.showNew = false;
+        for (let i = this.messages.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [this.messages[i], this.messages[j]] = [this.messages[j], this.messages[i]];
+        }
     }, 300);
   }
 
