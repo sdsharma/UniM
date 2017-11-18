@@ -36,6 +36,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   currentList: number = 1;
   messageText: string = '';
   showNew: boolean = false;
+  selectedNewLabels: string[] = [];
 
   firstUsers:string[] = ["Dhruhin Kurli", "Jasmin Zieman"];
   secondUsers:string[] = ["Lilian Derose","Brendan Gulley", "Roxie Hage", "Maurita Wohlwend", "Belen Dalzell"];
@@ -252,5 +253,29 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   selectEvent(evt) {
     this.messageText = "📎 " + this.files.name;
     this.sendMessage();
+  }
+
+  newLabelSelect(evt){
+    let index = this.selectedNewLabels.indexOf(evt.source.value);
+    if(index > -1){
+      this.selectedNewLabels.splice(index, 1);
+    }
+    else {
+      this.selectedNewLabels.push(evt.source.value);
+    }
+  }
+
+  arrContains(value) {
+    let index = this.selectedNewLabels.indexOf(value);
+    if (index == -1){
+      return false;
+    }
+    return true;
+  }
+
+  smartToggle(evt){
+    if(evt.checked){
+      this.selectedNewLabels = [];
+    }
   }
 }

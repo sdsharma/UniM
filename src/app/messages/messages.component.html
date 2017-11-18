@@ -2,7 +2,7 @@
  <td-navigation-drawer flex sidenavTitle="Settings" [name]="userData.firstname + ' ' + userData.lastname" [email]="userData.email">
     <mat-nav-list>
       <p class="accounts-head inline"><strong>Smart Priority</strong><mat-icon matTooltip="Enable this if you want the app to autonomously determine the priority of your conversations" matTooltipPosition="after" class="info">info</mat-icon></p>
-      <mat-slide-toggle class="inline smart-toggle" [(ngModel)]="smartMode"></mat-slide-toggle>
+      <mat-slide-toggle class="inline smart-toggle" [(ngModel)]="smartMode" (change)="smartToggle($event)"></mat-slide-toggle>
       <mat-divider></mat-divider>
       <p class="accounts-head"><strong>Connected Accounts</strong></p>
       <mat-divider></mat-divider>
@@ -49,13 +49,13 @@
       <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="homeFilter">Home</mat-checkbox></a>
       <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="importantFilter">Important</mat-checkbox></a>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
-          <a mat-list-item *ngIf="!smartMode"><mat-checkbox>{{newLabels[i].title}}</mat-checkbox></a>
+          <a mat-list-item *ngIf="!smartMode"><mat-checkbox [value]="newLabels[i].title" (change)="newLabelSelect($event)">{{newLabels[i].title}}</mat-checkbox></a>
       </ng-template>
       <mat-divider *ngIf="!smartMode"></mat-divider>
       <td-search-box #searchBox class="pull-top-sm pull-bottom-sm" placeholder="Search Recipients" [debounce]="100" (searchDebounce)="searchRecipients = $event" (search)="searchRecipients = $event" (clear)="searchRecipients= ''" [alwaysVisible]="true">
     </td-search-box>
     <mat-divider></mat-divider>
-      <span *ngIf="smartMode || workFilter || (!workFilter && !homeFilter && !importantFilter)">
+      <span *ngIf="smartMode || workFilter || (!workFilter && !homeFilter && !importantFilter && selectedNewLabels.length == 0)">
         <h3 mat-subheader *ngIf="!smartMode">WORK</h3>
         <h3 mat-subheader *ngIf="smartMode">HIGH PRIORITY</h3>
           <a mat-list-item *ngFor="let user of firstUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(firstUsers[i], i); !media.query('gt-sm') && navList.close(); currentList = 2">
@@ -66,7 +66,7 @@
           </a>
         <mat-divider></mat-divider>
       </span>
-      <span *ngIf="smartMode || homeFilter || (!workFilter && !homeFilter && !importantFilter)">
+      <span *ngIf="smartMode || homeFilter || (!workFilter && !homeFilter && !importantFilter && selectedNewLabels.length == 0)">
         <h3 mat-subheader *ngIf="!smartMode">HOME</h3>
         <h3 mat-subheader *ngIf="smartMode">MEDIUM PRIORITY</h3>
           <a mat-list-item *ngFor="let user of secondUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(secondUsers[i], i); !media.query('gt-sm') && navList.close(); currentList = 2">
@@ -76,7 +76,7 @@
           </a>
         <mat-divider></mat-divider>
       </span>
-      <span *ngIf="smartMode || importantFilter || (!workFilter && !homeFilter && !importantFilter)">
+      <span *ngIf="smartMode || importantFilter || (!workFilter && !homeFilter && !importantFilter && selectedNewLabels.length == 0)">
         <h3 mat-subheader *ngIf="!smartMode">IMPORTANT</h3>
         <h3 mat-subheader *ngIf="smartMode">LOW PRIORITY</h3>
           <a mat-list-item *ngFor="let user of thirdUsers | filterBy: searchRecipients; let i = index" (click)="shuffleMessages(thirdUsers[i], i); !media.query('gt-sm') && navList.close(); currentList = 3">
@@ -88,7 +88,7 @@
         <mat-divider *ngIf="!smartMode"></mat-divider>
       </span>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
-          <h3 mat-subheader *ngIf="!smartMode && (!workFilter && !homeFilter && !importantFilter)">{{newLabels[i].title}}</h3>
+          <h3 mat-subheader *ngIf="!smartMode && ((!workFilter && !homeFilter && !importantFilter && selectedNewLabels.length == 0) || arrContains(newLabels[i].title))">{{newLabels[i].title}}</h3>
           <a mat-list-item *ngFor="let user of newLabels[i].values | filterBy: searchRecipients; let y = index" (click)="shuffleMessages(user, y); !media.query('gt-sm') && navList.close(); currentList = i + 4">
             <img mat-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
             <h3 mat-line>{{user}}</h3>
@@ -99,7 +99,7 @@
       </ng-template>
 
     </mat-nav-list>
-  <a mat-fab td-sidenav-content color="accent" class="mat-fab-position-bottom-right fab-new" (click)="!media.query('gt-sm') && navList.close(); handleNewMessage()"> 
+  <a mat-fab td-sidenav-content color="accent" class="mat-fab-position-bottom-right fab-new" (click)="!media.query('gt-sm') && navList.close(); handleNewMessage()" matTooltip="New Message" matTooltipPosition="before"> 
     <mat-icon>add</mat-icon>
   </a>
   <mat-sidenav-container tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']" fullscreen>
