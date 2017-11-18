@@ -85,7 +85,7 @@
             <p mat-line>{{randomwords[i + 6]}}</p>
             <mat-icon class="tc-amber-800">fiber_new</mat-icon>
           </a>
-        <mat-divider></mat-divider>
+        <mat-divider *ngIf="!smartMode"></mat-divider>
       </span>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
           <h3 mat-subheader *ngIf="!smartMode && (!workFilter && !homeFilter && !importantFilter)">{{newLabels[i].title}}</h3>
@@ -145,7 +145,7 @@
     <td-layout-footer-inner class="padding-align">
       <div layout="row" layout-align="start center">
         <div>
-          <td-file-input #fileInput [(ngModel)]="files" multiple>
+          <td-file-input #fileInput [(ngModel)]="files" (select)="selectEvent($event)">
             <button mat-icon-button matTooltip="Attach File" matTooltipPosition="after"><mat-icon>attach_file</mat-icon></button>
           </td-file-input>
         </div>
