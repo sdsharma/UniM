@@ -278,4 +278,8 @@ export class MessagesComponent implements AfterViewInit, OnInit {
       this.selectedNewLabels = [];
     }
   }
+
+  hideSideMenu() {
+    (<any>document.getElementsByClassName('mat-drawer-shown')[0]).click();
+  }
 }

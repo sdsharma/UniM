@@ -91,3 +91,9 @@ mat-form-field .mat-input-underline.mat-form-field-underline {
 .hidden {
 	display: none;
 }
+
+.hideSideMenu {
+	position: absolute;
+    top: 17px;
+    left: 276px;
+}

@@ -1,6 +1,7 @@
 <td-layout #layout>
  <td-navigation-drawer flex sidenavTitle="Settings" [name]="userData.firstname + ' ' + userData.lastname" [email]="userData.email">
     <mat-nav-list>
+      <mat-icon matTooltip="Close menu" matTooltipPosition="before" class="hideSideMenu" (click)="hideSideMenu()">close</mat-icon>
       <p class="accounts-head inline"><strong>Smart Priority</strong><mat-icon matTooltip="Enable this if you want the app to autonomously determine the priority of your conversations" matTooltipPosition="after" class="info">info</mat-icon></p>
       <mat-slide-toggle class="inline smart-toggle" [(ngModel)]="smartMode" (change)="smartToggle($event)"></mat-slide-toggle>
       <mat-divider></mat-divider>
@@ -149,7 +150,7 @@
             <button mat-icon-button matTooltip="Attach File" matTooltipPosition="after"><mat-icon>attach_file</mat-icon></button>
           </td-file-input>
         </div>
-          <emoji-input [popupAnchor]="'bottom'" flex id="messageInput" [(model)]="messageText"></emoji-input>
+          <emoji-input [popupAnchor]="'bottom'" flex id="messageInput" [(model)]="messageText" [onEnter]="sendMessage.bind(this)"></emoji-input>
         <div>
           <button mat-icon-button matTooltip="Send" matTooltipPosition="before" (click)="sendMessage()"><mat-icon>send</mat-icon></button>
         </div>
