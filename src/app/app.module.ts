@@ -21,6 +21,8 @@ import { ROUTING } from "./app.routing";
 import { AccessControlGuard } from './shared/guards/accesscontrol.service';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import {MatRadioModule} from '@angular/material';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 const reducers = {
   userState: UserReducer
@@ -63,7 +65,8 @@ export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
     ROUTING,
     ReactiveFormsModule,
     FilterPipeModule,
-    MatRadioModule
+    MatRadioModule,
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
   ],
   providers: [AccessControlGuard],
   bootstrap: [AppComponent]
