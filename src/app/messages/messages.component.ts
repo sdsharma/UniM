@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import { Angulartics2 } from 'angulartics2';
 
 @Component({
   selector: 'app-messages',
@@ -53,7 +54,8 @@ export class MessagesComponent implements AfterViewInit, OnInit {
               private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef,
               private store: Store<AppState>,
-              private router: Router) {}
+              private router: Router,
+              private angulartics2: Angulartics2) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -235,8 +237,15 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   }
 
   filter(val: string): string[] {
-      return this.options.filter(option =>
+      let vals = this.options.filter(option =>
         option.toLowerCase().indexOf(val.toLowerCase()) === 0);
+      if(vals.length > 0){
+        this.angulartics2.eventTrack.next({ 
+          action: 'Search Found With Two Searches', 
+          properties: { category: 'Search' },
+        });
+      }
+      return vals;
    }
 
   blurAuto(): void {
