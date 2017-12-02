@@ -46,11 +46,11 @@
   </div>
   <mat-nav-list td-sidenav-content>
       <a mat-list-item (click)="openPriorities()" *ngIf="!smartMode"><mat-icon mat-list-icon>add_circle_outline</mat-icon> Create a New Label</a>
-      <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="workFilter">Work</mat-checkbox></a>
-      <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="homeFilter">Home</mat-checkbox></a>
-      <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="importantFilter">Important</mat-checkbox></a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="workFilter">Work&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox></a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="homeFilter">Home&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox></a>
+      <a mat-list-item *ngIf="!smartMode"><mat-checkbox [(ngModel)]="importantFilter">Important&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox></a>
       <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="newLabels">
-          <a mat-list-item *ngIf="!smartMode"><mat-checkbox [value]="newLabels[i].title" (change)="newLabelSelect($event)">{{newLabels[i].title}}</mat-checkbox></a>
+          <a mat-list-item *ngIf="!smartMode"><mat-checkbox [value]="newLabels[i].title" (change)="newLabelSelect($event)">{{newLabels[i].title}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox></a>
       </ng-template>
       <mat-divider *ngIf="!smartMode"></mat-divider>
       <td-search-box #searchBox class="pull-top-sm pull-bottom-sm" placeholder="Search Recipients" [debounce]="100" (searchDebounce)="searchRecipients = $event" (search)="searchRecipients = $event" (clear)="searchRecipients= ''" [alwaysVisible]="true">

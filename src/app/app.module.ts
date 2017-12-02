@@ -23,6 +23,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import {MatRadioModule} from '@angular/material';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { EventPipe } from './event.pipe';
+import { ContactPipe } from './contact.pipe';
 
 const reducers = {
   userState: UserReducer
@@ -43,7 +45,9 @@ export function appReducers(state: AppState = APP_INITIAL_STATE, action: any) {
     AppComponent,
     MessagesComponent,
     LoginComponent,
-    LinkComponent
+    LinkComponent,
+    EventPipe,
+    ContactPipe
   ],
   imports: [
     BrowserModule,

@@ -7,8 +7,9 @@
 
 @include mat-core();
 
-$primary: mat-palette($mat-light-blue, 800);
-$accent:  mat-palette($mat-light-green, 600, A100, A400);
+$primary: mat-palette($mat-pink, 600);
+
+$accent:  mat-palette($mat-light-blue, 600);
 
 $warn:    mat-palette($mat-red, 600);
 

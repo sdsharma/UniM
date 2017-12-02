@@ -6,3 +6,7 @@
 body .push-sm {
 	margin: 0 !important;
 }
+
+.tc-amber-800 {
+    color: #d81b60 !important;
+}

@@ -74,7 +74,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
           acceptButton: 'Accept',
         }).afterClosed().subscribe((accept: boolean) => {});
       }
-    }, 20000);
+    }, 45000);
   }
 
   ngOnInit(): void {
@@ -134,7 +134,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
 
   logout(): void {
   	this.store.dispatch({ type: ActionTypes.LOGOUT, payload: null });
-    this.router.navigate(['login']);
+    this.router.navigate(['/login']);
   }
 
   sendMessage(): void {
@@ -237,15 +237,8 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   }
 
   filter(val: string): string[] {
-      let vals = this.options.filter(option =>
+      return this.options.filter(option =>
         option.toLowerCase().indexOf(val.toLowerCase()) === 0);
-      if(vals.length > 0){
-        this.angulartics2.eventTrack.next({ 
-          action: 'Search Found With Two Searches', 
-          properties: { category: 'Search' },
-        });
-      }
-      return vals;
    }
 
   blurAuto(): void {
