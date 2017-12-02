@@ -10,3 +10,8 @@ body .push-sm {
 .tc-amber-800 {
     color: #d81b60 !important;
 }
+
+#messageSearch .mat-form-field-placeholder {
+	color: #fff;
+	margin-top: 5px;
+}
