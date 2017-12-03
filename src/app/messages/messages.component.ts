@@ -74,7 +74,7 @@ export class MessagesComponent implements AfterViewInit, OnInit {
           acceptButton: 'Accept',
         }).afterClosed().subscribe((accept: boolean) => {});
       }
-    }, 45000);
+    }, 20000);
   }
 
   ngOnInit(): void {
