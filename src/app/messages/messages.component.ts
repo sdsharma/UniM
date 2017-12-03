@@ -253,7 +253,6 @@ export class MessagesComponent implements AfterViewInit, OnInit {
   }
 
   selectEvent(evt) {
-    
     this.messageText = "📎 " + this.files.name;
     this.sendMessage();
   }

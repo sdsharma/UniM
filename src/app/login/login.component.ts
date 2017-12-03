@@ -45,6 +45,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['link']);
         }
     });
+    (<any>document).getElementById("bgVideo").controls = false;
+    (<any>document).getElementById("bgVideo").muted = true;
   }
 
   
